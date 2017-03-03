@@ -1,3 +1,4 @@
+// require packages
 var express = require("express");
 var path = require("path");
 var logger = require("morgan");
@@ -10,15 +11,16 @@ var LocalStrategy = require('passport-local').Strategy;
 var session = require('express-session');
 var ReactDOM = require('react-dom');
 
-var app = express();
-
+// require files
 var User = require("./models/userModel");
 var auth = require('./auth');
 var index = require('./routes/index');
 
+var app = express();
 
 app.set('port', (process.env.PORT || 3000));
 
+// middleware
 app.use('/', express.static(path.join(__dirname, 'public')));
 
 app.use(logger('dev'));
