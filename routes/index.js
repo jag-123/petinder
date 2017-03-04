@@ -1,4 +1,7 @@
 var express = require('express');
+var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
 
 var router = express.Router();
 
@@ -7,13 +10,18 @@ router.get('/', function(req, res, next) {
 	res.json({'text' : 'Hello World'});
 });
 
+// returns the login page
+router.get('/login', function(req, res) {
+	res.send('placeholder');
+});
+
 // for logging in with facebook
 router.get('/auth/facebook', 
 	passport.authenticate('facebook')
 );
 
 router.get('/auth/facebook/callback',
-	passport.authenticatae('facebook', {successRedirect: '/',
+	passport.authenticate('facebook', {successRedirect: '/',
 										failureRedirect: '/login'})
 );
 
@@ -21,7 +29,7 @@ router.get('/auth/facebook/callback',
 router.get('/user', 
 	function(req, res, next) {
 		if(req.isAuthenticated()) { 
-			return next(): 
+			return next(); 
 		}
 		res.send(401);
 	}, function(req, res) {
