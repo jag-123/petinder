@@ -2,11 +2,12 @@ var express = require('express');
 
 var router = express.Router();
 
-//returns the home page handlebars template, index.hbs
+// returns the homepage
 router.get('/', function(req, res, next) {
 	res.json({'text' : 'Hello World'});
 });
 
+// for logging in with facebook
 router.get('/auth/facebook', 
 	passport.authenticate('facebook')
 );
@@ -16,6 +17,7 @@ router.get('/auth/facebook/callback',
 										failureRedirect: '/login'})
 );
 
+// check which user is logged in
 router.get('/user', 
 	function(req, res, next) {
 		if(req.isAuthenticated()) { 
@@ -26,12 +28,15 @@ router.get('/user',
 		res.send(req.user);
 });
 
+
+// log in with local strategy
 router.post('/login', passport.authenticate('local'), 
 	function(req, res) {
 		res.redirect('/');
 	}
 );
 
+// register new user
 router.post('/register', function(req, res) {
   User.register(new User({username: req.body.username}), req.body.password, function(err, account) {
     if (err) {
@@ -44,5 +49,10 @@ router.post('/register', function(req, res) {
   });	
 })
 
+// logout anyone who is logged in
+router.get('/logout', function(req, res) {
+	req.logout()
+	res.redirect('/')
+})
 
 module.exports = router;
