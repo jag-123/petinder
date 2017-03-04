@@ -74,7 +74,7 @@ app.use(function(req, res, next) {
 });
 
 //Routes for our backend models
-app.use('/api', index);
+app.use('/api/', index);
 // app.use('/api/data', deviceData);
 
 app.listen(app.get('port'), function() {
