@@ -1,0 +1,4 @@
+module.exports = {
+  'PETFINDER_APP_KEY' : '939f12ed7d810ee51d01c80015f7147b',
+  'PETFINDER_APP_SECRET' : '9e61b6dad8367139791e77cc42c82c60',
+}
