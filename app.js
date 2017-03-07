@@ -10,6 +10,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var LocalStrategy = require('passport-local').Strategy;
 var session = require('express-session');
 var ReactDOM = require('react-dom');
+var findOrCreate = require('mongoose-findorcreate');
 
 // require files
 var User = require("./models/userModel");
@@ -34,12 +35,14 @@ passport.use(new FacebookStrategy({
     callbackURL: auth.FACEBOOK_CALLBACK_URL
   },
   function(accessToken, refreshToken, profile, done) {
+  	console.log("FACEBOOK!!!")
+  	console.log(profile.displayName, 'profile')
     User.findOrCreate({username: profile.displayName}, function (err, user) {
       console.log('user', user);
       if (err) { return done(err);}
       if (!user) {return done(null, false)}
       return done(null, user);
-    })
+    });
   }
 ));
 
@@ -74,7 +77,7 @@ app.use(function(req, res, next) {
 });
 
 //Routes for our backend models
-app.use('/api/', index);
+app.use('/', index);
 // app.use('/api/data', deviceData);
 
 app.listen(app.get('port'), function() {
