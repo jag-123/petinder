@@ -7,12 +7,12 @@ var router = express.Router();
 
 // returns the homepage
 router.get('/', function(req, res, next) {
-	res.json({'text' : 'Hello World'});
+	res.json({'text' : 'PeTinder'});
 });
 
 // returns the login page
 router.get('/login', function(req, res) {
-	res.send('placeholder');
+	res.json({'text': 'placeholder'});
 });
 
 // for logging in with facebook
