@@ -1,7 +1,7 @@
 To-Do List
 - Database for pets
-- Databse  for users
-- Oauth & login page
+- ~~Databse  for users~~
+- ~~Oauth & login page~~
 - Main page - login to get started or swipe
 - Set preferences page
 - Swipe page 
