@@ -1,43 +1,42 @@
-var HelloWorld = React.createClass({
-  
+// the wrapper for everything
+var PeTinder = React.createClass({
   getInitialState: function() {
+    // default for logged out state
     return {
-      h1Text: '',
       username: null,
+      name: null,
       userId: null
     };
   },
-
-  usernameHandler: function(userData) {
-    this.setState({
-      username: userData.username
+  // update state with user data if someone is logged in
+  componentDidMount: function() {
+    $.ajax({
+      url: '/user',
+      dataType: 'json',
+      cache: false,
+      type: 'GET',
+      success: function(data) {
+          console.log(data);
+          this.setState({
+              username: data.username,
+              name: data.name,
+              userId: data.id
+          });
+      }.bind(this),
+      failure: function(xhr, status, err) {
+          console.error('GET /user', status, err.toString());
+      }.bind(this)
     });
   },
-
-  componentDidMount: function() {
-  //   $.ajax({
-  //     url: '/api/',
-  //     dataType: 'json',
-  //     cache: false,
-  //     type: 'GET',
-  //     success: function(data) {
-  // //data from res.json in routes/index.js is {text: "HelloWorld"}, so we want to access the text field of data
-  //         this.setState({
-  //             h1Text: data.text
-  //         });
-  //         console.log('ok');
-  //     }.bind(this),
-  //     failure: function(xhr, status, err) {
-  //         console.error('GET /api', status, err.toString());
-  //     }.bind(this)
-  //   });
-  },
-
+  // need to ask about how to update component to show username without refreshing
+  // maybe componentWillUpdate?
   render: function() {
     return (
       <div>
         <h1>PeTinder</h1>
-        <LoginLocal username={this.usernameHandler} user={this.state.user}/>
+        <p>{this.state.name} {this.state.username}</p>
+        <Logout/>
+        <LoginLocal/>
         <LoginFacebook/>
         <RegisterNewUser/>
       </div>
@@ -45,6 +44,7 @@ var HelloWorld = React.createClass({
   }
 });
 
+// component for logging in with local strategy
 var LoginLocal = React.createClass({
   getInitialState: function() {
     return {
@@ -52,18 +52,19 @@ var LoginLocal = React.createClass({
       password: ''
     };
   },
+  // updates current state to value of username field
   updateNewUser: function (event) {
-    // this makes sure that whatever is typed in the username box
-    // is what our current user state is
     this.setState({
       username: event.target.value
     });
   },
+  // updates current state to value of password field
   updatePassword: function(event) {
     this.setState({
       password: event.target.value
     });
   },
+  // makes a post request with submitted form data
   login: function(event) {
     event.preventDefault();
     var formData = {
@@ -71,29 +72,15 @@ var LoginLocal = React.createClass({
       password: this.state.password
     }
     // question: what do I do here? How do I display a different page in React?
-    $.post('api/login/', formData)
-      .done()
-      .error();
+    // Austin's answer: https://github.com/ReactTraining/react-router
+    $.post('/login', formData)
+      .done(function(data) {
+        console.log(data);
+      })
+      .error(function(err, status) {
+        console.error(status);
+      });
   },
-  componentDidMount: function () {
-  //   $.ajax({
-  //     url: '/api/login/',
-  //     dataType: 'json',
-  //     cache: false,
-  //     type: 'GET',
-  //     success: function(data) {
-  // //data from res.json in routes/index.js is {text: "HelloWorld"}, so we want to access the text field of data
-  //         this.setState({
-  //             placeholder: data.text
-  //         });
-  //     }.bind(this),
-  //     failure: function(xhr, status, err) {
-  //         console.error('GET /api/login', status, err.toString());
-  //     }.bind(this)
-    // });
-  },
-  // question: is a form the right way to do this or should I use a regular button with onClick b/c
-  // state is being updated?
 	render: function() {
 		return (
 			<div>
@@ -122,31 +109,28 @@ var LoginLocal = React.createClass({
 	}
 });
 
+// component for logging in with Facebook
 var LoginFacebook = React.createClass({
+  // nothing currently needs to be in the state
   getInitialState: function() {
-    return {
-
-    }
-  },
-  login: function(event) {
-    event.preventDefault();
-
-    alert('facebook');
+    return {};
   },
   render: function() {
     return (
       <div>
         <h2>Login with Facebook</h2>
+        <form action="/auth/facebook">
         <input
-          type="button"
+          type="submit"
           value="Login"
-          onClick={this.login}
         />
+        </form>
       </div>
     );
   }
 });
 
+// component for registering as a new user
 var RegisterNewUser = React.createClass({
   getInitialState: function() {
     return {
@@ -157,22 +141,27 @@ var RegisterNewUser = React.createClass({
       passwordMatch: false
     }
   },
+  // updates current state to value of name field
   updateName: function(event) {
     this.setState({
       name: event.target.value
     });
   },
+  // updates current state to value of username field
   updateUsername: function(event) {
     this.setState({
       username: event.target.value
     });
   },
+  // updates current state to value of password field
   updatePassword: function(event) {
     console.log(event.target.value);
     this.setState({
       password: event.target.value
     });
   },
+  // updates current state to value of confirm password field
+  // and determines whether or not the passwords match
   matchPasswords: function(event) {
     this.setState({
       confirmPassword: event.target.value
@@ -191,7 +180,27 @@ var RegisterNewUser = React.createClass({
   },
   register: function(event) {
     event.preventDefault();
-    alert(this.state.name)
+    if (this.state.passwordMatch == false) {
+      alert('Passwords do not match, please try again');
+    } else if (this.state.name == '') {
+      alert('A name for the account must be provided');
+    } else if (this.state.username == '') {
+      alert('A username must be provided');
+    } else {
+      var formData = {
+          name: this.state.name,
+          username: this.state.username,
+          password: this.state.password
+        } 
+    
+      $.post('/register', formData)
+        .done(function(data) {
+          console.log(data);
+        })
+        .error(function (err, status) {
+          console.error(err, status);
+        });
+    }
   },
   render: function() {
     return (
@@ -232,7 +241,38 @@ var RegisterNewUser = React.createClass({
   }
 });
 
+// component for logging user out 
+var Logout = React.createClass({
+  getInitialState: function() {
+    return {}
+  },
+  // I don't know if any information has to be logged here, 
+  // but it's ok for testing for now
+  logout: function(event) {
+    event.preventDefault;
+    
+    $.get('/logout/')
+      .done(function(data) {
+        console.log(data)
+      })
+      .error(function(xhr, status, err) {
+        console.error('GET /home', status, err.toString());
+      });
+  },
+  render: function() {
+    return (
+      <div>
+        <form onSubmit={this.logout}>
+          <input
+            type="submit"
+            value="Logout"
+          />
+        </form>
+      </div>
+    )
+  }
+});
 ReactDOM.render(
-  <HelloWorld />,
+  <PeTinder />,
   document.getElementById('content')
 );
