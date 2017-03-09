@@ -17,6 +17,10 @@ var User = require("./models/userModel");
 var auth = require('./auth');
 var index = require('./routes/index');
 
+// connect to database
+mongoose.connect('mongodb://localhost/petinder');
+
+// initialize express
 var app = express();
 
 app.set('port', (process.env.PORT || 3000));
@@ -29,16 +33,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 
+// this is called when Facebook provides account information
 passport.use(new FacebookStrategy({
     clientID: auth.FACEBOOK_APP_ID,
     clientSecret: auth.FACEBOOK_APP_SECRET,
     callbackURL: auth.FACEBOOK_CALLBACK_URL
   },
   function(accessToken, refreshToken, profile, done) {
-  	console.log("FACEBOOK!!!")
-  	console.log(profile.displayName, 'profile')
-    User.findOrCreate({username: profile.displayName}, function (err, user) {
-      console.log('user', user);
+  	// create a new user if one is not already in the database
+    User.findOrCreate({username: profile.displayName, name: profile.displayName}, function (err, user) {
       if (err) { return done(err);}
       if (!user) {return done(null, false)}
       return done(null, user);
@@ -46,6 +49,7 @@ passport.use(new FacebookStrategy({
   }
 ));
 
+// this is called to authenticate the user's password
 passport.use(new LocalStrategy(User.authenticate()));
 
 app.use(express.static(path.join(__dirname, "public")));
@@ -76,9 +80,8 @@ app.use(function(req, res, next) {
     next();
 });
 
-//Routes for our backend models
+//Routes for backend models
 app.use('/', index);
-// app.use('/api/data', deviceData);
 
 app.listen(app.get('port'), function() {
   console.log('Server started: http://localhost:' + app.get('port') + '/');
