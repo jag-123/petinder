@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-var HelloWorld = React.createClass({
-
-=======
 // the wrapper for everything
 var PeTinder = React.createClass({
->>>>>>> a1363c1c29df5d242e6b5ec7fe49c023c05fad6b
   getInitialState: function() {
     // default for logged out state
     return {
@@ -196,8 +191,8 @@ var RegisterNewUser = React.createClass({
           name: this.state.name,
           username: this.state.username,
           password: this.state.password
-        } 
-    
+        }
+
       $.post('/register', formData)
         .done(function(data) {
           console.log(data);
@@ -246,16 +241,16 @@ var RegisterNewUser = React.createClass({
   }
 });
 
-// component for logging user out 
+// component for logging user out
 var Logout = React.createClass({
   getInitialState: function() {
     return {}
   },
-  // I don't know if any information has to be logged here, 
+  // I don't know if any information has to be logged here,
   // but it's ok for testing for now
   logout: function(event) {
     event.preventDefault;
-    
+
     $.get('/logout/')
       .done(function(data) {
         console.log(data)
