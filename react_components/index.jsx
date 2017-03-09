@@ -1,5 +1,5 @@
 var HelloWorld = React.createClass({
-  
+
   getInitialState: function() {
     return {
       h1Text: '',
@@ -100,8 +100,8 @@ var LoginLocal = React.createClass({
         <h2>Login with username and password</h2>
         <form id="local-login" onSubmit={this.login}>
           <p>Username: </p>
-          <input 
-            type="text" 
+          <input
+            type="text"
             value={this.state.username}
             onChange={this.updateNewUser}
           />
@@ -199,19 +199,19 @@ var RegisterNewUser = React.createClass({
         <h2>Register an account</h2>
         <form id="register" onSubmit={this.register}>
           <p>Name: </p>
-          <input 
+          <input
             type="text"
             value={this.state.name}
             onChange={this.updateName}
           />
           <p>Username: </p>
-          <input 
+          <input
             type="text"
             value={this.state.username}
             onChange={this.updateUsername}
           />
           <p>Password: </p>
-          <input 
+          <input
             type="password"
             value={this.state.password}
             onChange={this.updatePassword}
@@ -236,3 +236,199 @@ ReactDOM.render(
   <HelloWorld />,
   document.getElementById('content')
 );
+
+//Preferences include animal, breed, size, sex, location
+class Preferences extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			pet: []
+		}
+		this.handleChange = this.handleChange.bind(this);
+	}
+	handleChange(e) {
+		const { checked, value } = e.target;
+		let { pet } = this.state;
+		if(checked && pet.indexOf(value) === -1) {
+			pet.push(value);
+		}else {
+			pet = pet.filter(i => i !== value)
+		}
+		this.setState({
+			pet
+		});
+	}
+	render() {
+		const { pet } = this.state;
+		return (
+			<div className='container'>
+				<h3>Choose your pets:</h3>
+				<div className='checkbox'>
+				<label>
+					<input
+						type='checkbox'
+						value='Cat'
+						checked={pet.indexOf('Cat') !== -1}
+						onChange={this.handleChange} />
+					Cat
+				</label>
+				</div>
+
+				<div className='checkbox'>
+				<label>
+					<input
+						type='checkbox'
+						value='Dog'
+						checked={pet.indexOf('Dog') !== -1}
+						onChange={this.handleChange} />
+					Dog
+				</label>
+				</div>
+
+				<div className='checkbox'>
+				<label>
+					<input
+						type='checkbox'
+						value='Barnyard'
+						checked={pet.indexOf('Barnyard') !== -1}
+						onChange={this.handleChange} />
+					Barnyard
+				</label>
+				</div>
+
+        <div className='checkbox'>
+        <label>
+          <input
+            type='checkbox'
+            value='Bird'
+            checked={pet.indexOf('Bird') !== -1}
+            onChange={this.handleChange} />
+          Bird
+        </label>
+        </div>
+
+        <div className='checkbox'>
+        <label>
+          <input
+            type='checkbox'
+            value='Horse'
+            checked={pet.indexOf('Horse') !== -1}
+            onChange={this.handleChange} />
+          Horse
+        </label>
+        </div>
+
+        <div className='checkbox'>
+        <label>
+          <input
+            type='checkbox'
+            value='Pig'
+            checked={pet.indexOf('Pig') !== -1}
+            onChange={this.handleChange} />
+          Pig
+        </label>
+        </div>
+
+        <div className='checkbox'>
+        <label>
+          <input
+            type='checkbox'
+            value='Reptile'
+            checked={pet.indexOf('Reptile') !== -1}
+            onChange={this.handleChange} />
+          Reptile
+        </label>
+        </div>
+
+        <div className='checkbox'>
+        <label>
+          <input
+            type='checkbox'
+            value='Smallfurry'
+            checked={pet.indexOf('Smallfurry') !== -1}
+            onChange={this.handleChange} />
+          Smallfurry
+        </label>
+        </div>
+
+				<br />
+				Your Pets: {pet.join(', ')}
+			</div>
+		)
+	}
+}
+
+ReactDOM.render(<Preferences />, document.getElementById('preferences'));
+
+var MasterSelect = React.createClass({
+    setMasterpieces: function(e) {
+      this.setState({
+        masterpieces: e.target.value
+      });
+    },
+    setMasterpiece: function(e) {
+      this.setState({
+        masterpiece: e.target.value
+      });
+    },
+
+    getInitialState: function() {
+      return {
+        masterpieces: 0,
+        masterpiece: 0
+      }
+    },
+
+    render: function() {
+      var breeds = [
+        'breed1',
+        'breed2',
+      ],
+      size = [
+        'small',
+        'large',
+      ],
+      sex = [
+        'M',
+        'F',
+      ],
+      masters = [
+        'Default value ',
+        'Breed ',
+        'Size ',
+        'Sex ',
+      ],
+      masterpieces = [
+        [], breeds, size, sex
+      ],
+      oMasters = masters.map(function(option, i) {
+        return <option value={i}>{option}</option>
+      }),
+      oMasterpieces = masterpieces[this.state.masterpieces].map(function(option, i) {
+        return <option value={i}>{option}</option>
+      });
+
+      return (
+        <div>
+          <select onChange={ this.setMasterpieces }>
+            { oMasters }
+          </select>
+          {
+            oMasterpieces && oMasterpieces.length ?
+            <span>
+              <select onChange={ this.setMasterpiece } >
+                { oMasterpieces }
+              </select>
+              <div className="gap">
+                { masters[this.state.masterpieces] } makes { masterpieces[this.state.masterpieces][this.state.masterpiece] }
+              </div>
+            </span>
+            : ''
+          }
+
+        </div>
+      )
+    }
+  });
+
+ReactDOM.render(<MasterSelect />, document.getElementById('test'));
