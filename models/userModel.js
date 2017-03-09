@@ -6,6 +6,7 @@ var userSchema = mongoose.Schema({
 	name: String,
 	username: String,
 	password: String
+	// data structure containing preferences
 });
 
 userSchema.plugin(findOrCreate);
