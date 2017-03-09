@@ -1,10 +1,7 @@
 var mongoose = require('mongoose');
 
 var petSchema = mongoose.Schema({
-	name: String,
-	animal: String,
-	description: String,
-	photo: String,
+	pfId: String,
 	matchedWith: [String]	// user _id
 });
 
