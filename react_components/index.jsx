@@ -1,3 +1,6 @@
+var React = require('react');
+import { Router, Route, browserHistory, IndexRoute } from 'react-router';
+import About from './About'
 // the wrapper for everything
 var PeTinder = React.createClass({
   getInitialState: function() {
@@ -273,6 +276,9 @@ var Logout = React.createClass({
   }
 });
 ReactDOM.render(
-  <PeTinder />,
-  document.getElementById('content')
+  <Router>
+  <IndexRoute component={About}/>
+  <Router path="/" component={About}/>
+  </Router>,
+  document.getElementById("content")
 );
