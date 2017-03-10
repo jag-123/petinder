@@ -5,7 +5,6 @@ import Login from './Login'
 import LoginFacebook from './LoginFacebook'
 import LoginLocal from './LoginLocal'
 import Logout from './Logout'
-import MasterSelect from './MasterSelect'
 import PeTinder from './PeTinder'
 import Preferences from './Preferences'
 

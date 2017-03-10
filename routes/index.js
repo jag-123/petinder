@@ -12,11 +12,11 @@ router.get('/', function(req, res, next) {
 });
 
 // for logging in with facebook
-router.get('/auth/facebook', 
+router.get('/auth/facebook',
 	passport.authenticate('facebook')
 );
 
-// the redirects are weird right now... will probably make more 
+// the redirects are weird right now... will probably make more
 // sense once we figure out changing pages with React
 router.get('/auth/facebook/callback',
 	passport.authenticate('facebook', {successRedirect: '/',
@@ -24,15 +24,15 @@ router.get('/auth/facebook/callback',
 );
 
 // GET information on the user who is logged in
-router.get('/user', 
+router.get('/user',
 	function(req, res, next) {
-		if(req.isAuthenticated()) { 
-			return next(); 
+		if(req.isAuthenticated()) {
+			return next();
 		}
 		res.send(401);
 	}, function(req, res) {
 		res.json({
-			username:req.user.username, 
+			username:req.user.username,
 			name: req.user.name,
 			id: req.user._id
 		});
@@ -40,7 +40,7 @@ router.get('/user',
 
 
 // log in with local strategy
-router.post('/login', passport.authenticate('local'), 
+router.post('/login', passport.authenticate('local'),
 	function(req, res) {
 		console.log(req);
 		res.json({
@@ -50,6 +50,23 @@ router.post('/login', passport.authenticate('local'),
 		});
 	}
 );
+
+//post preferences
+router.post('/preferences', function(req, res) {
+	console.log(req.body);
+	console.log(req.user);
+	User.findOne({"_id":req.user._id},function(err,user){
+		user.preferences = (req.body);
+		user.save(function(err){
+			if (err){
+				res.sendStatus(500);
+				return;
+			}
+		})
+		console.log(user.preferences)
+	})
+});
+
 
 // register new user
 router.post('/register', function(req, res) {
@@ -65,7 +82,7 @@ router.post('/register', function(req, res) {
       	id: account._id
       });
     });
-  });	
+  });
 })
 
 // logout anyone who is logged in
