@@ -3,6 +3,11 @@ var auth = require('../auth');
 var secret = auth.PETFINDER_APP_SECRET;
 var key = auth.PETFINDER_APP_KEY;
 
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+// Import routing components
+import {Router, Route, browserHistory} from 'react-router';
+
 // the wrapper for everything
 var PeTinder = React.createClass({
   getInitialState: function() {
@@ -324,10 +329,6 @@ var GetPet = React.createClass({
     )
   }
 })
-ReactDOM.render(
-  <PeTinder />,
-  document.getElementById('content')
-);
 
 //Preferences include animal, breed, size, sex, location
 class Preferences extends React.Component {
@@ -450,8 +451,6 @@ class Preferences extends React.Component {
 	}
 }
 
-ReactDOM.render(<Preferences />, document.getElementById('preferences'));
-
 var MasterSelect = React.createClass({
     setMasterpieces: function(e) {
       this.setState({
@@ -523,4 +522,10 @@ var MasterSelect = React.createClass({
     }
   });
 
-ReactDOM.render(<MasterSelect />, document.getElementById('test'));
+render(
+    <Router history={browserHistory}>
+        <Route path="/" component={LoginLocal}/>
+        <Route path="/about" component={PeTinder}/>
+    </Router>,
+    document.getElementById('content')
+);
