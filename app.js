@@ -83,6 +83,16 @@ app.use(function(req, res, next) {
 //Routes for backend models
 app.use('/', index);
 
+// get absolute path
+var INDEX_DIR = path.resolve(__dirname, './public');
+
+// if the url is not a route on the server, we send 
+// index.html and the react router routes the correct content
+app.get('*', function(req, res) {
+  console.log(INDEX_DIR);
+  res.sendFile(INDEX_DIR + '/index.html');
+});
+
 app.listen(app.get('port'), function() {
   console.log('Server started: http://localhost:' + app.get('port') + '/');
 });
