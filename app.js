@@ -53,7 +53,7 @@ passport.use(new FacebookStrategy({
 passport.use(new LocalStrategy(User.authenticate()));
 
 app.use(express.static(path.join(__dirname, "public")));
-app.use(session({ 
+app.use(session({
   secret: 'this is not a secret ;)',
   resave: false,
   saveUninitialized: false
@@ -85,7 +85,7 @@ app.use('/', index);
 
 var INDEX_DIR = path.resolve(__dirname, './public');
 
-// if the url is not a route on the server, we send 
+// if the url is not a route on the server, we send
 // index.html and the react router routes the correct content
 app.get('*', function(req, res) {
   console.log(INDEX_DIR);

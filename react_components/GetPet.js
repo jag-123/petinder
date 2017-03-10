@@ -23,7 +23,7 @@ export default React.createClass({
     return argsString;
   },
   makeURL: function(func, argObj) {
-    var base = 'api.petfinder.com/' + func + '?'
+    var base = 'https://api.petfinder.com/' + func + '?'
     var argsString = this.makeArgsString(argObj);
     var signature = this.makeSignature(argsString);
 

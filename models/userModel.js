@@ -5,7 +5,8 @@ var passportLocalMongoose = require('passport-local-mongoose');
 var userSchema = mongoose.Schema({
 	name: String,
 	username: String,
-	password: String
+	password: String,
+	preferences: []
 	// data structure containing preferences
 });
 
