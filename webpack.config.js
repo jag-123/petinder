@@ -31,6 +31,7 @@ module.exports = {
                 //only include files in the client directory (so we don't compile our node modules or server side code)
                 include: APP_DIR,
                 loader: 'babel-loader',
+                exclude: /node_modules/,
                 query: {
                     //use es6 and or jsx syntax
                     presets: ['react', 'es2015'],
