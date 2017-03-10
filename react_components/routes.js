@@ -12,9 +12,6 @@ import Preferences from './Preferences'
 
 module.exports = (
 	<Route path="/" component={PeTinder}>
-		<Route path="/login" component={Login}>
-			<Route path="/login" component={LoginLocal}/>
-			<Route path="/login" component={LoginFacebook}/>
-		</Route>
+		<Route path="/loginss" component={Login}/>
 	</Route>
 )

@@ -26584,12 +26584,7 @@
 	module.exports = _react2.default.createElement(
 		_reactRouter.Route,
 		{ path: '/', component: _PeTinder2.default },
-		_react2.default.createElement(
-			_reactRouter.Route,
-			{ path: '/login', component: _Login2.default },
-			_react2.default.createElement(_reactRouter.Route, { path: '/login', component: _LoginLocal2.default }),
-			_react2.default.createElement(_reactRouter.Route, { path: '/login', component: _LoginFacebook2.default })
-		)
+		_react2.default.createElement(_reactRouter.Route, { path: '/loginss', component: _Login2.default })
 	);
 
 /***/ },
@@ -29107,16 +29102,181 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _LoginLocal = __webpack_require__(241);
+
+	var _LoginLocal2 = _interopRequireDefault(_LoginLocal);
+
+	var _LoginFacebook = __webpack_require__(240);
+
+	var _LoginFacebook2 = _interopRequireDefault(_LoginFacebook);
+
+	var _RegisterNewUser = __webpack_require__(333);
+
+	var _RegisterNewUser2 = _interopRequireDefault(_RegisterNewUser);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
 		displayName: 'Login',
 
 		render: function render() {
-			{
-				this.props.children;
-			}
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(_LoginLocal2.default, null),
+				_react2.default.createElement(_LoginFacebook2.default, null),
+				_react2.default.createElement(_RegisterNewUser2.default, null)
+			);
 		}
+	});
+
+/***/ },
+/* 333 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	// component for registering as a new user
+	exports.default = _react2.default.createClass({
+	  displayName: 'RegisterNewUser',
+
+	  getInitialState: function getInitialState() {
+	    return {
+	      name: '',
+	      username: '',
+	      password: '',
+	      confirmPassword: '',
+	      passwordMatch: false
+	    };
+	  },
+	  // updates current state to value of name field
+	  updateName: function updateName(event) {
+	    this.setState({
+	      name: event.target.value
+	    });
+	  },
+	  // updates current state to value of username field
+	  updateUsername: function updateUsername(event) {
+	    this.setState({
+	      username: event.target.value
+	    });
+	  },
+	  // updates current state to value of password field
+	  updatePassword: function updatePassword(event) {
+	    console.log(event.target.value);
+	    this.setState({
+	      password: event.target.value
+	    });
+	  },
+	  // updates current state to value of confirm password field
+	  // and determines whether or not the passwords match
+	  matchPasswords: function matchPasswords(event) {
+	    this.setState({
+	      confirmPassword: event.target.value
+	    });
+	    if (event.target.value == this.state.password) {
+	      console.log('they match!');
+	      this.setState({
+	        passwordMatch: true
+	      });
+	    } else {
+	      console.log('no match');
+	      this.setState({
+	        passwordMatch: false
+	      });
+	    }
+	  },
+	  register: function register(event) {
+	    event.preventDefault();
+	    if (this.state.passwordMatch == false) {
+	      alert('Passwords do not match, please try again');
+	    } else if (this.state.name == '') {
+	      alert('A name for the account must be provided');
+	    } else if (this.state.username == '') {
+	      alert('A username must be provided');
+	    } else {
+	      var formData = {
+	        name: this.state.name,
+	        username: this.state.username,
+	        password: this.state.password
+	      };
+
+	      $.post('/register', formData).done(function (data) {
+	        console.log(data);
+	      }).error(function (err, status) {
+	        console.error(err, status);
+	      });
+	    }
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'h2',
+	        null,
+	        'Register an account'
+	      ),
+	      _react2.default.createElement(
+	        'form',
+	        { id: 'register', onSubmit: this.register },
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'Name: '
+	        ),
+	        _react2.default.createElement('input', {
+	          type: 'text',
+	          value: this.state.name,
+	          onChange: this.updateName
+	        }),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'Username: '
+	        ),
+	        _react2.default.createElement('input', {
+	          type: 'text',
+	          value: this.state.username,
+	          onChange: this.updateUsername
+	        }),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'Password: '
+	        ),
+	        _react2.default.createElement('input', {
+	          type: 'password',
+	          value: this.state.password,
+	          onChange: this.updatePassword
+	        }),
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          'Confirm Password: '
+	        ),
+	        _react2.default.createElement('input', {
+	          type: 'password',
+	          value: this.state.confirmPassword,
+	          onChange: this.matchPasswords
+	        }),
+	        _react2.default.createElement('input', {
+	          type: 'submit',
+	          value: 'Register'
+	        })
+	      )
+	    );
+	  }
 	});
 
 /***/ }
