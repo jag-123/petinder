@@ -38,6 +38,7 @@ export default React.createClass({
       <div>
         <h1>PeTinder</h1>
         <p>{this.state.name} {this.state.username}</p>
+        {this.props.children}
       </div>
     );
   }
