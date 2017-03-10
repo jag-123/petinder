@@ -8,10 +8,12 @@ import Logout from './Logout'
 import MasterSelect from './MasterSelect'
 import PeTinder from './PeTinder'
 import Preferences from './Preferences'
-// import RegisterNewUser from './RegisterNewUser'
 
 module.exports = (
 	<Route path="/" component={PeTinder}>
-		<Route path="/loginss" component={Login}/>
+		<Route path="/userlogin" component={Login}/>
+		<Route path="/userlogout" component={Logout}/>
+		<Route path="/preferences" component={Preferences}/>
+		<Route path="getpet" animal="pig" component={GetPet}/>
 	</Route>
 )
