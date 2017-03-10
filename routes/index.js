@@ -11,11 +11,6 @@ router.get('/', function(req, res, next) {
 	res.json({'text' : 'PeTinder'});
 });
 
-// returns the login page. This is not being used right now!!!
-router.get('/login', function(req, res) {
-	res.json({'text': 'placeholder'});
-});
-
 // for logging in with facebook
 router.get('/auth/facebook', 
 	passport.authenticate('facebook')
@@ -76,7 +71,7 @@ router.post('/register', function(req, res) {
 // logout anyone who is logged in
 router.get('/logout', function(req, res) {
 	req.logout()
-	res.send("logged out") // this is for testing. should be taken out later!!
+	res.redirect('/')
 })
 
 module.exports = router;
