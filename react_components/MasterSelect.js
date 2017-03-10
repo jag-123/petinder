@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default MasterSelect = React.createClass({
+export default React.createClass({
     setMasterpieces: function(e) {
       this.setState({
         masterpieces: e.target.value
