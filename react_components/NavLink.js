@@ -5,6 +5,6 @@ import { Link } from 'react-router';
 export default React.createClass({
   render() {
   	//  ...this.props clones properties where this class is instantiated
-    return <Link {...this.props} activeClassName="active"/>
+    return <Link {...this.props} activeStyle={{color:'#53acff'}} activeClassName="active"/>
   }
 })

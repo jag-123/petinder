@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { browserHistory } from 'react-router';
 
 export default React.createClass({
   getInitialState: function() {
@@ -10,9 +10,9 @@ export default React.createClass({
   logout: function(event) {
     event.preventDefault;
 
-    $.get('/logout/')
+    $.get('/logout')
       .done(function(data) {
-        console.log(data)
+        console.log(data);
       })
       .error(function(xhr, status, err) {
         console.error('GET /home', status, err.toString());
