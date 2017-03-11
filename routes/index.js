@@ -29,7 +29,7 @@ router.get('/user',
 		if(req.isAuthenticated()) {
 			return next();
 		}
-		res.send(401);
+		res.json({username: null})
 	}, function(req, res) {
 		res.json({
 			username:req.user.username,
