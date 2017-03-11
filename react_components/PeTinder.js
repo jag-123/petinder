@@ -1,4 +1,6 @@
 import React from 'react';
+import NavLink from './NavLink'
+import Logout from './Logout'
 
 // the wrapper for everything
 export default React.createClass({
@@ -31,15 +33,32 @@ export default React.createClass({
       }.bind(this)
     });
   },
-  // need to ask about how to update component to show username without refreshing
-  // maybe componentWillUpdate?
+  // might need components to render for homepage... but this
+  // is an idea for how it kinda might work...
+  // anything rendered by this component shows up on EVERY PAGE
   render: function() {
-    return (
-      <div>
-        <h1>PeTinder</h1>
-        <p>{this.state.name} {this.state.username}</p>
-        {this.props.children}
-      </div>
-    );
+    if (this.state.username){
+      return (
+        <div>
+          <h1>What a Pig</h1>
+          <ul role="nav">
+            <li><NavLink to="/" onlyActiveOnIndex>Home</NavLink></li>
+            <li><NavLink to="/preferences">Set Preferences</NavLink></li>
+            <li><NavLink to="/getpet">Pets</NavLink></li>
+          </ul>
+          <Logout/>
+          <p>Welcome, {this.state.name}</p>
+          {this.props.children}
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <h1>What a Pig</h1>
+          <p>Please <NavLink to="/userlogin">log in</NavLink> to get started</p>
+          {this.props.children}
+        </div>
+      );
+    }
   }
 });
