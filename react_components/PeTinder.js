@@ -1,8 +1,10 @@
 import React from 'react';
+import { Link, browserHistory } from 'react-router';
 
 // the wrapper for everything
 export default React.createClass({
   getInitialState: function() {
+    console.log('test');
     // default for logged out state
     return {
       username: null,
@@ -28,6 +30,7 @@ export default React.createClass({
       }.bind(this),
       failure: function(xhr, status, err) {
           console.error('GET /user', status, err.toString());
+          //browserHistory.push("/userlogin");
       }.bind(this)
     });
   },
