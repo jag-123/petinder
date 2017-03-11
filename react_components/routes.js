@@ -1,5 +1,5 @@
 import React from 'react'
-import { route, Route, IndexRoute } from 'react-router'
+import { route, Route, Link, IndexRoute } from 'react-router'
 import GetPet from './GetPet'
 import Login from './Login'
 import LoginFacebook from './LoginFacebook'
@@ -13,6 +13,6 @@ module.exports = (
 		<Route path="/userlogin" component={Login}/>
 		<Route path="/userlogout" component={Logout}/>
 		<Route path="/preferences" component={Preferences}/>
-		<Route path="getpet" animal="pig" component={GetPet}/>
+		<Route path="/getpet" animal="pig" component={GetPet}/>
 	</Route>
 )

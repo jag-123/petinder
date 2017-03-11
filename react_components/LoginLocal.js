@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, browserHistory } from 'react-router';
 
 // component for logging in with local strategy
 export default React.createClass({
@@ -31,6 +32,8 @@ export default React.createClass({
     // Austin's answer: https://github.com/ReactTraining/react-router
     $.post('/login', formData)
       .done(function(data) {
+        //redirects to preferences page
+        browserHistory.push("/preferences");
         console.log(data);
       })
       .error(function(err, status) {

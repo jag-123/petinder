@@ -26581,7 +26581,7 @@
 		_react2.default.createElement(_reactRouter.Route, { path: '/userlogin', component: _Login2.default }),
 		_react2.default.createElement(_reactRouter.Route, { path: '/userlogout', component: _Logout2.default }),
 		_react2.default.createElement(_reactRouter.Route, { path: '/preferences', component: _Preferences2.default }),
-		_react2.default.createElement(_reactRouter.Route, { path: 'getpet', animal: 'pig', component: _GetPet2.default })
+		_react2.default.createElement(_reactRouter.Route, { path: '/getpet', animal: 'pig', component: _GetPet2.default })
 	);
 
 /***/ },
@@ -27136,6 +27136,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(178);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// component for logging in with local strategy
@@ -27170,6 +27172,8 @@
 	    // question: what do I do here? How do I display a different page in React?
 	    // Austin's answer: https://github.com/ReactTraining/react-router
 	    $.post('/login', formData).done(function (data) {
+	      //redirects to preferences page
+	      _reactRouter.browserHistory.push("/preferences");
 	      console.log(data);
 	    }).error(function (err, status) {
 	      console.error(status);
@@ -27488,6 +27492,7 @@
 	  displayName: 'PeTinder',
 
 	  getInitialState: function getInitialState() {
+	    console.log('test');
 	    // default for logged out state
 	    return {
 	      username: null,
@@ -27513,6 +27518,7 @@
 	      }.bind(this),
 	      failure: function (xhr, status, err) {
 	        console.error('GET /user', status, err.toString());
+	        //browserHistory.push("/userlogin");
 	      }.bind(this)
 	    });
 	  },
@@ -28193,6 +28199,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactRouter = __webpack_require__(178);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	//Preferences include animal, breed, size, sex
@@ -28283,6 +28291,7 @@
 					sex: this.state.sex
 				};
 				$.post('/preferences', preferenceData).done(function (data) {
+					_reactRouter.browserHistory.push("/getpet");
 					console.log(data);
 				}).error(function (err, status) {
 					console.error(status);

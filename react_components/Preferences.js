@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link, browserHistory } from 'react-router';
 
 //Preferences include animal, breed, size, sex
 export default class Preferences extends Component {
@@ -59,6 +60,7 @@ export default class Preferences extends Component {
 		}
 		$.post('/preferences', preferenceData)
 			.done(function(data) {
+				browserHistory.push("/getpet");
 				console.log(data);
 			})
 			.error(function(err, status) {
