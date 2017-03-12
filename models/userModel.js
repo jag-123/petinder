@@ -6,7 +6,8 @@ var userSchema = mongoose.Schema({
 	name: String,
 	username: String,
 	password: String,
-	preferences: []
+	preferences: [],
+	matchedWith: [String]
 	// data structure containing preferences
 });
 
