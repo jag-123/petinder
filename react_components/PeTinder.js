@@ -3,6 +3,13 @@ import NavLink from './NavLink'
 import Logout from './Logout'
 import { Navbar, NavItem, NavDropdown, MenuItem, Nav } from 'react-bootstrap';
 
+// Ariana's to do in morning:
+// * figure out how to handle displays when user is/isn't logged in
+// (it's funky now)
+// * comb through code for consistency and clarity (comments!!!)
+// split up larger chunks into separate components
+// sort components into subfolders and make sure paths are updated
+
 // the wrapper for everything
 export default React.createClass({
   getInitialState: function() {
@@ -11,8 +18,8 @@ export default React.createClass({
     return {
       username: null,
       name: null,
-      userId: null
-      // preferences needed
+      userId: null,
+      userPrefs: []
     };
   },
   // update state with user data if someone is logged in
@@ -27,7 +34,8 @@ export default React.createClass({
           this.setState({
               username: data.username,
               name: data.name,
-              userId: data.id
+              userId: data.id,
+              userPrefs: data.preferences
           });
       }.bind(this),
       failure: function(xhr, status, err) {
@@ -57,7 +65,7 @@ export default React.createClass({
               </Nav>
           </Navbar>
           <p>Welcome, {this.state.name}</p>
-          {this.props.children}
+          {React.cloneElement(this.props.children, {user:this.state.userId, prefs:this.state.userPrefs})}
         </div>
       );
     } else {
