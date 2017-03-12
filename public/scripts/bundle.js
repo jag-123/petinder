@@ -26573,6 +26573,10 @@
 
 	var _Preferences2 = _interopRequireDefault(_Preferences);
 
+	var _MatchPage = __webpack_require__(510);
+
+	var _MatchPage2 = _interopRequireDefault(_MatchPage);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	module.exports = _react2.default.createElement(
@@ -26580,7 +26584,8 @@
 		{ path: '/', component: _PeTinder2.default },
 		_react2.default.createElement(_reactRouter.Route, { path: '/userlogin', component: _Login2.default }),
 		_react2.default.createElement(_reactRouter.Route, { path: '/preferences', component: _Preferences2.default }),
-		_react2.default.createElement(_reactRouter.Route, { path: '/getpet', component: _GetPet2.default })
+		_react2.default.createElement(_reactRouter.Route, { path: '/getpet', component: _GetPet2.default }),
+		_react2.default.createElement(_reactRouter.Route, { path: '/matches', component: _MatchPage2.default })
 	);
 
 /***/ },
@@ -26597,7 +26602,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _MatchButton = __webpack_require__(238);
+	var _MatchButton = __webpack_require__(235);
 
 	var _MatchButton2 = _interopRequireDefault(_MatchButton);
 
@@ -26739,36 +26744,13 @@
 /* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = { "default": __webpack_require__(236), __esModule: true };
-
-/***/ },
-/* 236 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var core  = __webpack_require__(237)
-	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
-	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
-	  return $JSON.stringify.apply($JSON, arguments);
-	};
-
-/***/ },
-/* 237 */
-/***/ function(module, exports) {
-
-	var core = module.exports = {version: '2.4.0'};
-	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
-
-/***/ },
-/* 238 */
-/***/ function(module, exports, __webpack_require__) {
-
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
 
-	var _stringify = __webpack_require__(235);
+	var _stringify = __webpack_require__(236);
 
 	var _stringify2 = _interopRequireDefault(_stringify);
 
@@ -26815,6 +26797,29 @@
 			);
 		}
 	});
+
+/***/ },
+/* 236 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = { "default": __webpack_require__(237), __esModule: true };
+
+/***/ },
+/* 237 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var core  = __webpack_require__(238)
+	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
+	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
+	  return $JSON.stringify.apply($JSON, arguments);
+	};
+
+/***/ },
+/* 238 */
+/***/ function(module, exports) {
+
+	var core = module.exports = {version: '2.4.0'};
+	if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
 
 /***/ },
 /* 239 */
@@ -27580,7 +27585,7 @@
 	// * comb through code for consistency and clarity (comments!!!)
 	// * split up larger chunks into separate components
 	// * sort components into subfolders and make sure paths are updated
-	// idea: maybe ONLY show a log in link (or something nicer looking) if 
+	// idea: maybe ONLY show a log in link (or something nicer looking) if
 	// the user has not logged in yet
 
 	// the wrapper for everything
@@ -27671,6 +27676,15 @@
 	                _NavLink2.default,
 	                { to: '/getpet' },
 	                'Pets'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              _reactBootstrap.NavItem,
+	              null,
+	              _react2.default.createElement(
+	                _NavLink2.default,
+	                { to: '/matches' },
+	                'Matches'
 	              )
 	            ),
 	            _react2.default.createElement(
@@ -27784,7 +27798,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(254);
-	module.exports = __webpack_require__(237).Object.assign;
+	module.exports = __webpack_require__(238).Object.assign;
 
 /***/ },
 /* 254 */
@@ -27800,7 +27814,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var global    = __webpack_require__(256)
-	  , core      = __webpack_require__(237)
+	  , core      = __webpack_require__(238)
 	  , ctx       = __webpack_require__(257)
 	  , hide      = __webpack_require__(259)
 	  , PROTOTYPE = 'prototype';
@@ -29115,7 +29129,7 @@
 	__webpack_require__(324);
 	__webpack_require__(325);
 	__webpack_require__(326);
-	module.exports = __webpack_require__(237).Symbol;
+	module.exports = __webpack_require__(238).Symbol;
 
 /***/ },
 /* 315 */
@@ -29420,7 +29434,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var global         = __webpack_require__(256)
-	  , core           = __webpack_require__(237)
+	  , core           = __webpack_require__(238)
 	  , LIBRARY        = __webpack_require__(298)
 	  , wksExt         = __webpack_require__(312)
 	  , defineProperty = __webpack_require__(260).f;
@@ -29599,7 +29613,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(330);
-	module.exports = __webpack_require__(237).Object.setPrototypeOf;
+	module.exports = __webpack_require__(238).Object.setPrototypeOf;
 
 /***/ },
 /* 330 */
@@ -29650,7 +29664,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(334);
-	var $Object = __webpack_require__(237).Object;
+	var $Object = __webpack_require__(238).Object;
 	module.exports = function create(P, D){
 	  return $Object.create(P, D);
 	};
@@ -30119,7 +30133,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(341);
-	module.exports = __webpack_require__(237).Object.entries;
+	module.exports = __webpack_require__(238).Object.entries;
 
 /***/ },
 /* 341 */
@@ -30581,7 +30595,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(349);
-	module.exports = __webpack_require__(237).Object.values;
+	module.exports = __webpack_require__(238).Object.values;
 
 /***/ },
 /* 349 */
@@ -35311,7 +35325,7 @@
 
 	__webpack_require__(295);
 	__webpack_require__(395);
-	module.exports = __webpack_require__(237).Array.from;
+	module.exports = __webpack_require__(238).Array.from;
 
 /***/ },
 /* 395 */
@@ -35406,7 +35420,7 @@
 	var classof   = __webpack_require__(400)
 	  , ITERATOR  = __webpack_require__(306)('iterator')
 	  , Iterators = __webpack_require__(300);
-	module.exports = __webpack_require__(237).getIteratorMethod = function(it){
+	module.exports = __webpack_require__(238).getIteratorMethod = function(it){
 	  if(it != undefined)return it[ITERATOR]
 	    || it['@@iterator']
 	    || Iterators[classof(it)];
@@ -47198,7 +47212,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(504);
-	module.exports = __webpack_require__(237).Object.getPrototypeOf;
+	module.exports = __webpack_require__(238).Object.getPrototypeOf;
 
 /***/ },
 /* 504 */
@@ -47220,7 +47234,7 @@
 
 	// most Object methods by ES6 should accept primitives
 	var $export = __webpack_require__(255)
-	  , core    = __webpack_require__(237)
+	  , core    = __webpack_require__(238)
 	  , fails   = __webpack_require__(265);
 	module.exports = function(KEY, exec){
 	  var fn  = (core.Object || {})[KEY] || Object[KEY]
@@ -47272,7 +47286,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(509);
-	var $Object = __webpack_require__(237).Object;
+	var $Object = __webpack_require__(238).Object;
 	module.exports = function defineProperty(it, key, desc){
 	  return $Object.defineProperty(it, key, desc);
 	};
@@ -47284,6 +47298,59 @@
 	var $export = __webpack_require__(255);
 	// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
 	$export($export.S + $export.F * !__webpack_require__(264), 'Object', {defineProperty: __webpack_require__(260).f});
+
+/***/ },
+/* 510 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: 'MatchPage',
+
+	  getInitialState: function getInitialState(event) {
+	    return {
+	      id: '',
+	      name: '',
+	      age: '',
+	      sex: '',
+	      size: '',
+	      image: 'http://simpleicon.com/wp-content/uploads/camera.png'
+	    };
+	  },
+	  componentDidMount: function componentDidMount(event) {
+	    console.log(this.props);
+	    console.log(this.props.user);
+	    console.log(this.state);
+	    $.get('/showmatches').done(function (data) {
+	      console.log('hi');
+	      console.log(data);
+	    }).error(function (xhr, status, err) {
+	      console.error('GET /home', status, err.toString());
+	    });
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'p',
+	        null,
+	        'test'
+	      )
+	    );
+	  }
+	});
 
 /***/ }
 /******/ ]);

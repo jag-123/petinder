@@ -102,6 +102,12 @@ router.get('/logout', function(req, res) {
 	res.redirect('/userlogin');
 })
 
+//displays user matches on matches page
+router.get('/showmatches', function(req, res){
+	console.log(req.user);
+	res.json({pet: req.user.matchedWith});
+});
+
 router.post('/match', function(req, res) {
 	User.findOne({"_id": req.body.user}, function(err, user) {
 		if (err) {
@@ -116,7 +122,7 @@ router.post('/match', function(req, res) {
 					}
 				} else {
 					var pet = new Pet({
-						"name": req.body.name, 
+						"name": req.body.name,
 						"age": req.body.age,
 						"sex": req.body.sex,
 						"size": req.body.size,
