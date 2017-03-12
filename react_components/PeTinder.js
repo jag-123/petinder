@@ -7,8 +7,10 @@ import { Navbar, NavItem, NavDropdown, MenuItem, Nav } from 'react-bootstrap';
 // * figure out how to handle displays when user is/isn't logged in
 // (it's funky now)
 // * comb through code for consistency and clarity (comments!!!)
-// split up larger chunks into separate components
-// sort components into subfolders and make sure paths are updated
+// * split up larger chunks into separate components
+// * sort components into subfolders and make sure paths are updated
+// idea: maybe ONLY show a log in link (or something nicer looking) if 
+// the user has not logged in yet
 
 // the wrapper for everything
 export default React.createClass({
