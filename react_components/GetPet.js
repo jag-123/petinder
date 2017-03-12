@@ -1,4 +1,5 @@
 import React from 'react';
+import MatchButton from './MatchButton'
 
 var md5 = require('md5'); // for hashing api signatures
 var auth = require('../auth');
@@ -10,16 +11,17 @@ export default React.createClass({
   getInitialState: function() {
     return {
       id: '',
-      image: 'http://simpleicon.com/wp-content/uploads/camera.png',
-      name: 'Press the button to get started'
+      name: '',
+      age: '',
+      sex: '',
+      image: 'http://simpleicon.com/wp-content/uploads/camera.png'
     }
   },
   getPreferences: function() {
     return {
-      animal: this.props.route.animal,
-      breed: this.props.route.breed,
-      size: this.props.route.size,
-      sex: this.props.route.sex
+      animal: this.props.prefs[0].pet,
+      size: this.props.prefs[0].size,
+      sex: this.props.prefs[0].sex
     };
   },
   makeSignature: function(argsString) {
@@ -41,30 +43,26 @@ export default React.createClass({
     return base + argsString + '&callback=?';
   },
   randomPet: function() {
-    console.log(this.getPreferences())
-    // having trouble with CORS so no GET request written yet
-    // making url to request random pet id #
     var getRandom = 'pet.getRandom';
     var argsGetRandom = {'location': '02492'};
     for (var pref in this.getPreferences()) {
       if (this.getPreferences()[pref] !== undefined) {
-        argsGetRandom[pref] = this.getPreferences()[pref];
+        var prefsArr = this.getPreferences()[pref];
+        argsGetRandom[pref] = prefsArr[Math.floor(Math.random()*prefsArr.length)];
       }
     }
 
     // making url to request pet with this id number
     var getPet = 'pet.get';
-    var argsGetPet = {id: '37235293'} // obtained from request
 
-    var getRandomUrl = this.makeURL(getRandom, argsGetRandom)
-    console.log(getRandomUrl, 'raandom pet id');
-    var getPetUrl = this.makeURL(getPet, argsGetPet)
+    var getRandomUrl = this.makeURL(getRandom, argsGetRandom);
     $.ajax({
       url: getRandomUrl,
       type: 'GET',
       dataType: 'jsonp',
       crossDomain: true,
       success: function(data) { 
+        console.log(getRandomUrl, JSON.stringify(data))
         this.setState({id: data.petfinder.petIds.id.$t});
         var getPet = 'pet.get';
         var argsGetPet = {
@@ -78,7 +76,7 @@ export default React.createClass({
           crossDomain:true,
           success: function(data) {
             var base = data.petfinder.pet;
-            if (base.media) {
+            if (base.media.photos !== undefined) {
               var photo = base.media.photos.photo
               this.setState({
                 image: photo[Math.floor((photo.length - 1) / 2)].$t
@@ -88,7 +86,6 @@ export default React.createClass({
                 image: this.getInitialState().image
               });
             }
-            console.log(base);
             this.setState({
               age: base.age.$t,
               name: base.name.$t,
@@ -103,16 +100,17 @@ export default React.createClass({
       error: function() { alert(':('); }.bind(this)
     });
   },
-  componentWillMount: function() {
-    this.randomPet();
-  },
+  // componentWillMount: function() {
+  //   this.randomPet();
+  // },
   render: function() {
     return (
       <div>
         <input type="button" value="get a pig" onClick={this.randomPet}/>
         <br/>
-        <h3>{this.state.name}: {this.state.age} {this.state.sex}</h3>
+        <h3>{this.state.name} {this.state.age} {this.state.sex}</h3>
         <img src={this.state.image} width="300"/>
+        <MatchButton next={this.randomPet} match={this.state} user={this.props.user}/>
       </div>
     )
   }
