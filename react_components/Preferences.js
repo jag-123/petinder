@@ -78,8 +78,8 @@ export default class Preferences extends Component {
 				<label>
 					<input
 						type='checkbox'
-						value='Cat'
-						checked={pet.indexOf('Cat') !== -1}
+						value='cat'
+						checked={pet.indexOf('cat') !== -1}
 						onChange={this.handlePetChange} />
 					Cat
 				</label>
@@ -89,8 +89,8 @@ export default class Preferences extends Component {
 				<label>
 					<input
 						type='checkbox'
-						value='Dog'
-						checked={pet.indexOf('Dog') !== -1}
+						value='dog'
+						checked={pet.indexOf('dog') !== -1}
 						onChange={this.handlePetChange} />
 					Dog
 				</label>
@@ -100,8 +100,8 @@ export default class Preferences extends Component {
 				<label>
 					<input
 						type='checkbox'
-						value='Barnyard'
-						checked={pet.indexOf('Barnyard') !== -1}
+						value='barnyard'
+						checked={pet.indexOf('barnyard') !== -1}
 						onChange={this.handlePetChange} />
 					Barnyard
 				</label>
@@ -111,8 +111,8 @@ export default class Preferences extends Component {
         <label>
           <input
             type='checkbox'
-            value='Bird'
-            checked={pet.indexOf('Bird') !== -1}
+            value='bird'
+            checked={pet.indexOf('bird') !== -1}
             onChange={this.handlePetChange} />
           Bird
         </label>
@@ -122,8 +122,8 @@ export default class Preferences extends Component {
         <label>
           <input
             type='checkbox'
-            value='Horse'
-            checked={pet.indexOf('Horse') !== -1}
+            value='horse'
+            checked={pet.indexOf('horse') !== -1}
             onChange={this.handlePetChange} />
           Horse
         </label>
@@ -133,8 +133,8 @@ export default class Preferences extends Component {
         <label>
           <input
             type='checkbox'
-            value='Pig'
-            checked={pet.indexOf('Pig') !== -1}
+            value='pig'
+            checked={pet.indexOf('pig') !== -1}
             onChange={this.handlePetChange} />
           Pig
         </label>
@@ -144,8 +144,8 @@ export default class Preferences extends Component {
         <label>
           <input
             type='checkbox'
-            value='Reptile'
-            checked={pet.indexOf('Reptile') !== -1}
+            value='reptile'
+            checked={pet.indexOf('reptile') !== -1}
             onChange={this.handlePetChange} />
           Reptile
         </label>
@@ -155,8 +155,8 @@ export default class Preferences extends Component {
         <label>
           <input
             type='checkbox'
-            value='Smallfurry'
-            checked={pet.indexOf('Smallfurry') !== -1}
+            value='smallfurry'
+            checked={pet.indexOf('smallfurry') !== -1}
             onChange={this.handlePetChange} />
           Smallfurry
         </label>
@@ -168,21 +168,21 @@ export default class Preferences extends Component {
 				<h3>Choose your sizes:</h3>
 				<div className='checkbox'>
 				<label>
-					<input type='checkbox' value='Small' checked={size.indexOf('Small') !== -1} onChange={this.handleSizeChange} />
+					<input type='checkbox' value='S' checked={size.indexOf('S') !== -1} onChange={this.handleSizeChange} />
 					Small
 				</label>
 				</div>
 
 				<div className='checkbox'>
 				<label>
-					<input type='checkbox' value='Medium' checked={size.indexOf('Medium') !== -1} onChange={this.handleSizeChange} />
+					<input type='checkbox' value='M' checked={size.indexOf('M') !== -1} onChange={this.handleSizeChange} />
 					Medium
 				</label>
 				</div>
 
 				<div className='checkbox'>
 				<label>
-					<input type='checkbox' value='Large' checked={size.indexOf('Large') !== -1} onChange={this.handleSizeChange} />
+					<input type='checkbox' value='L' checked={size.indexOf('L') !== -1} onChange={this.handleSizeChange} />
 					Large
 				</label>
 				</div>
@@ -200,14 +200,14 @@ export default class Preferences extends Component {
 				<h3>Choose your sexes:</h3>
 				<div className='checkbox'>
 				<label>
-					<input type='checkbox' value='Male' checked={sex.indexOf('Male') !== -1} onChange={this.handleSexChange} />
+					<input type='checkbox' value='M' checked={sex.indexOf('M') !== -1} onChange={this.handleSexChange} />
 					Male
 				</label>
 				</div>
 
 				<div className='checkbox'>
 				<label>
-					<input type='checkbox' value='Female' checked={sex.indexOf('Female') !== -1} onChange={this.handleSexChange} />
+					<input type='checkbox' value='F' checked={sex.indexOf('F') !== -1} onChange={this.handleSexChange} />
 					Female
 				</label>
 				</div>
