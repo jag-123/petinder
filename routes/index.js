@@ -8,6 +8,7 @@ var session = require("express-session");
 var router = express.Router();
 
 var User = require("../models/userModel");
+var Pet = require("../models/petModel");
 // returns the homepage
 // router.get('/', function(req, res, next) {
 // 	res.json({'text' : 'PeTinder'});
@@ -100,5 +101,50 @@ router.get('/logout', function(req, res) {
 	req.logout();
 	res.redirect('/userlogin');
 })
+
+router.post('/match', function(req, res) {
+	User.findOne({"_id": req.body.user}, function(err, user) {
+		if (err) {
+			console.error(err);
+		} else {
+			Pet.findOne({"pfId": req.body.petId}, function(err, pet) {
+				if (err) {
+					console.error(err);
+				} else if (pet) {
+					if ((pet.matchedWith).indexOf(req.body.user) === -1) {
+						pet.matchedWith.push(req.body.user);
+					}
+				} else {
+					var pet = new Pet({
+						"name": req.body.name, 
+						"age": req.body.age,
+						"sex": req.body.sex,
+						"size": req.body.size,
+						"pfId": req.body.petId,
+						"matchedWith": [req.body.user]
+					});
+
+					pet.save(function(err) {
+						if(err) {
+							console.error(err);
+						}
+					});
+				}
+
+				if ((user.matchedWith).indexOf(pet._id) === -1) {
+					console.log('not made yet', user.matchedWith);
+					user.matchedWith.push(pet._id);
+					console.log('made', user.matchedWith);
+				}
+				user.save(function(err) {
+					if(err) {
+						console.error(err);
+					}
+				});
+				res.json({user:user, pet:pet})
+			});
+		}
+	});
+});
 
 module.exports = router;
