@@ -14,6 +14,7 @@ export default React.createClass({
       name: '',
       age: '',
       sex: '',
+      size: '',
       image: 'http://simpleicon.com/wp-content/uploads/camera.png'
     }
   },
@@ -61,8 +62,7 @@ export default React.createClass({
       type: 'GET',
       dataType: 'jsonp',
       crossDomain: true,
-      success: function(data) { 
-        console.log(getRandomUrl, JSON.stringify(data))
+      success: function(data) {
         this.setState({id: data.petfinder.petIds.id.$t});
         var getPet = 'pet.get';
         var argsGetPet = {
@@ -76,6 +76,7 @@ export default React.createClass({
           crossDomain:true,
           success: function(data) {
             var base = data.petfinder.pet;
+            console.log(base);
             if (base.media.photos !== undefined) {
               var photo = base.media.photos.photo
               this.setState({
@@ -90,7 +91,8 @@ export default React.createClass({
               age: base.age.$t,
               name: base.name.$t,
               animal: base.animal.$t,
-              sex: base.sex.$t
+              sex: base.sex.$t,
+              size: base.size.$t
             });
 
           }.bind(this),
