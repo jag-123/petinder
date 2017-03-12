@@ -66,10 +66,8 @@ router.post('/preferences', function(req, res) {
 				res.sendStatus(500);
 				return;
 			}
-		})
-		console.log(user.preferences)
-	})
-	console.log(req.user);
+		});
+	});
 	res.json({
 		username: req.user.username,
 		name: req.user.name,
@@ -132,9 +130,7 @@ router.post('/match', function(req, res) {
 				}
 
 				if ((user.matchedWith).indexOf(pet._id) === -1) {
-					console.log('not made yet', user.matchedWith);
 					user.matchedWith.push(pet._id);
-					console.log('made', user.matchedWith);
 				}
 				user.save(function(err) {
 					if(err) {

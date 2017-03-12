@@ -15,7 +15,6 @@ import { Navbar, NavItem, NavDropdown, MenuItem, Nav } from 'react-bootstrap';
 // the wrapper for everything
 export default React.createClass({
   getInitialState: function() {
-    console.log('test');
     // default for logged out state
     return {
       username: null,
@@ -32,13 +31,14 @@ export default React.createClass({
       cache: false,
       type: 'GET',
       success: function(data) {
-          console.log(data);
           this.setState({
               username: data.username,
               name: data.name,
               userId: data.id,
               userPrefs: data.preferences
           });
+          console.log(this.state.username, "state")
+          this.render;
       }.bind(this),
       failure: function(xhr, status, err) {
           console.error('GET /user', status, err.toString());
@@ -50,6 +50,7 @@ export default React.createClass({
   // is an idea for how it kinda might work...
   // anything rendered by this component shows up on EVERY PAGE
   render: function() {
+    console.log(this.state.username)
     if (this.state.username){
       return (
         <div>

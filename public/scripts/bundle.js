@@ -26601,11 +26601,15 @@
 
 	var _MatchButton2 = _interopRequireDefault(_MatchButton);
 
+	var _NextButton = __webpack_require__(510);
+
+	var _NextButton2 = _interopRequireDefault(_NextButton);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var md5 = __webpack_require__(239); // for hashing api signatures
 	var auth = __webpack_require__(243);
-	var secret = auth.PETFINDER_APP_SECRET;
+	var secret = auth.PETFINDER_APP_SECRET; // can delete if makeSignature is deleted
 	var key = auth.PETFINDER_APP_KEY;
 
 	// starting api request stuff
@@ -26613,6 +26617,7 @@
 	  displayName: 'GetPet',
 
 	  getInitialState: function getInitialState() {
+	    // default states
 	    return {
 	      id: '',
 	      name: '',
@@ -26623,6 +26628,9 @@
 	    };
 	  },
 	  getPreferences: function getPreferences() {
+	    // pull out lists of preferences from the prefs property
+	    // assuming prefs is a one-element array
+
 	    return {
 	      animal: this.props.prefs[0].pet,
 	      size: this.props.prefs[0].size,
@@ -26630,11 +26638,23 @@
 	    };
 	  },
 	  makeSignature: function makeSignature(argsString) {
+	    // this is for a secure connection which doesn't seem to work
+	    // should probably just remove it
+	    // args string: an api formatted string of arguments and values
+	    // with the format &key=key&arg1=val1&arg2=val2 etc...
+
 	    var sig = md5(secret + argsString);
 	    return "&sig=" + sig;
 	  },
 	  makeArgsString: function makeArgsString() {
 	    var argObj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+	    // compiles all arguments and parameters into a string for the request
+	    // argObj: an object of keys and values that correspond to arguments
+	    // to be passed to the api. Both the keys and values must be strings 
+	    //  example: {'animal': 'cat'}
+	    // the key is automatically prepended so this does not need to go into 
+	    // the argObj
 
 	    var argsString = '&key=' + key;
 	    for (var k in argObj) {
@@ -26644,14 +26664,22 @@
 	    return argsString;
 	  },
 	  makeURL: function makeURL(func, argObj) {
+	    // creates a url for the api request that requests
+	    // a json formatted response
+	    // func: the api method. This is a string like 'pet.find'
+	    // argObj: an object of keys and values to be passed as arguments to
+	    // the request keys and values must all be strings
+
 	    var base = 'http://api.petfinder.com/' + func + '?format=json';
 	    var argsString = this.makeArgsString(argObj);
-	    // var signature = this.makeSignature(argsString);
 	    return base + argsString + '&callback=?';
 	  },
 	  randomPet: function randomPet() {
+	    //takes user preferences and finids a random pet that satifies the preferences
+
 	    var getRandom = 'pet.getRandom';
-	    var argsGetRandom = { 'location': '02492' };
+	    var argsGetRandom = { 'location': '02492' }; // location doesn't seem to do anything
+
 	    for (var pref in this.getPreferences()) {
 	      if (this.getPreferences()[pref] !== undefined) {
 	        var prefsArr = this.getPreferences()[pref];
@@ -26659,11 +26687,9 @@
 	      }
 	    }
 
-	    // making url to request pet with this id number
-	    var getPet = 'pet.get';
-
 	    var getRandomUrl = this.makeURL(getRandom, argsGetRandom);
 	    $.ajax({
+	      // first request a random pet id
 	      url: getRandomUrl,
 	      type: 'GET',
 	      dataType: 'jsonp',
@@ -26676,19 +26702,22 @@
 	        };
 	        var getPetUrl = this.makeURL(getPet, argsGetPet);
 	        $.ajax({
+	          // then get the pet's profile
 	          url: getPetUrl,
 	          type: 'GET',
 	          dataType: 'jsonp',
 	          crossDomain: true,
 	          success: function (data) {
 	            var base = data.petfinder.pet;
-	            console.log(base);
 	            if (base.media.photos !== undefined) {
+	              // if there is a picture list provided use the one in the middle
 	              var photo = base.media.photos.photo;
 	              this.setState({
+	                // gets a picture that is pretty often the right size...
 	                image: photo[Math.floor((photo.length - 1) / 2)].$t
 	              });
 	            } else {
+	              // use the default image
 	              this.setState({
 	                image: this.getInitialState().image
 	              });
@@ -26711,9 +26740,6 @@
 	      }.bind(this)
 	    });
 	  },
-	  // componentWillMount: function() {
-	  //   this.randomPet();
-	  // },
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
@@ -26730,28 +26756,15 @@
 	        this.state.sex
 	      ),
 	      _react2.default.createElement('img', { src: this.state.image, width: '300' }),
-	      _react2.default.createElement(_MatchButton2.default, { next: this.randomPet, match: this.state, user: this.props.user })
+	      _react2.default.createElement(_MatchButton2.default, { next: this.randomPet, match: this.state, user: this.props.user }),
+	      _react2.default.createElement(_NextButton2.default, { next: this.randomPet })
 	    );
 	  }
 	});
 
 /***/ },
-/* 235 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = { "default": __webpack_require__(236), __esModule: true };
-
-/***/ },
-/* 236 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var core  = __webpack_require__(237)
-	  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
-	module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
-	  return $JSON.stringify.apply($JSON, arguments);
-	};
-
-/***/ },
+/* 235 */,
+/* 236 */,
 /* 237 */
 /***/ function(module, exports) {
 
@@ -26768,10 +26781,6 @@
 		value: true
 	});
 
-	var _stringify = __webpack_require__(235);
-
-	var _stringify2 = _interopRequireDefault(_stringify);
-
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
@@ -26781,18 +26790,18 @@
 	exports.default = _react2.default.createClass({
 		displayName: 'MatchButton',
 
-		onSuccess: function onSuccess(data) {
-			console.log(data);
-		},
 		onError: function onError(err, status) {
 			console.error(status);
 		},
 		saveMatch: function saveMatch(event) {
+			// save the pet in the database, save the user
+			// in the pet's matches, save the pet in the 
+			// user's matches
 			event.preventDefault();
-			alert((0, _stringify2.default)(this.props.match.size));
 
 			var matchData = {
 				user: this.props.user, // user _id
+				// characteristics to save in the pet database
 				petId: this.props.match.id, // petfinder id
 				name: this.props.match.name,
 				age: this.props.match.age,
@@ -26800,21 +26809,17 @@
 				size: this.props.match.size
 			};
 
-			$.post('/match', matchData).done(this.onSuccess).error(this.onError);
-			// to do in the morning: 
-			// * make a route to create a new pet in database
-			// * make a route to add match to list of matches in 
-			// user database
-			// * use the randomPet function (passed as next in props)
+			$.post('/match', matchData).done(this.props.next()) //next is randomPet from the GetPet component
+			.error(this.onError);
 		},
 		render: function render() {
 			return _react2.default.createElement(
 				'div',
 				null,
-				_react2.default.createElement('input', { type: 'button', value: 'clickme', onClick: this.saveMatch })
+				_react2.default.createElement('input', { type: 'button', value: 'swipe right', onClick: this.saveMatch })
 			);
 		}
-	});
+	}); // the "swipe right" button. If this one is pressed, the match is saved in the pet and user databases.
 
 /***/ },
 /* 239 */
@@ -27588,7 +27593,6 @@
 	  displayName: 'PeTinder',
 
 	  getInitialState: function getInitialState() {
-	    console.log('test');
 	    // default for logged out state
 	    return {
 	      username: null,
@@ -27605,13 +27609,14 @@
 	      cache: false,
 	      type: 'GET',
 	      success: function (data) {
-	        console.log(data);
 	        this.setState({
 	          username: data.username,
 	          name: data.name,
 	          userId: data.id,
 	          userPrefs: data.preferences
 	        });
+	        console.log(this.state.username, "state");
+	        this.render;
 	      }.bind(this),
 	      failure: function (xhr, status, err) {
 	        console.error('GET /user', status, err.toString());
@@ -27623,6 +27628,7 @@
 	  // is an idea for how it kinda might work...
 	  // anything rendered by this component shows up on EVERY PAGE
 	  render: function render() {
+	    console.log(this.state.username);
 	    if (this.state.username) {
 	      return _react2.default.createElement(
 	        'div',
@@ -47284,6 +47290,38 @@
 	var $export = __webpack_require__(255);
 	// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
 	$export($export.S + $export.F * !__webpack_require__(264), 'Object', {defineProperty: __webpack_require__(260).f});
+
+/***/ },
+/* 510 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+		displayName: "NextButton",
+
+		nextPet: function nextPet() {
+			// skips to the next pet without saving a match
+			this.props.next();
+		},
+		render: function render() {
+			return _react2.default.createElement(
+				"div",
+				null,
+				_react2.default.createElement("input", { type: "button", value: "swipe left", onClick: this.nextPet })
+			);
+		}
+	});
 
 /***/ }
 /******/ ]);
