@@ -38,7 +38,8 @@ router.get('/user',
 		res.json({
 			username:req.user.username,
 			name: req.user.name,
-			id: req.user._id
+			id: req.user._id,
+			preferences: req.user.preferences
 		});
 });
 
