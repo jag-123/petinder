@@ -11,8 +11,7 @@ import Preferences from './Preferences'
 module.exports = (
 	<Route path="/" component={PeTinder}>
 		<Route path="/userlogin" component={Login}/>
-		<Route path="/userlogout" component={Logout}/>
 		<Route path="/preferences" component={Preferences}/>
-		<Route path="/getpet" animal="pig" component={GetPet}/>
+		<Route path="/getpet" component={GetPet}/>
 	</Route>
 )
