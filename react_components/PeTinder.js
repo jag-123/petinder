@@ -9,7 +9,7 @@ import { Navbar, NavItem, NavDropdown, MenuItem, Nav } from 'react-bootstrap';
 // * comb through code for consistency and clarity (comments!!!)
 // * split up larger chunks into separate components
 // * sort components into subfolders and make sure paths are updated
-// idea: maybe ONLY show a log in link (or something nicer looking) if 
+// idea: maybe ONLY show a log in link (or something nicer looking) if
 // the user has not logged in yet
 
 // the wrapper for everything
@@ -64,6 +64,7 @@ export default React.createClass({
                 <NavItem><NavLink to="/" onlyActiveOnIndex>Home</NavLink></NavItem>
                 <NavItem><NavLink to="/preferences">Set Preferences</NavLink></NavItem>
                 <NavItem><NavLink to="/getpet">Pets</NavLink></NavItem>
+                <NavItem><NavLink to="/matches">Matches</NavLink></NavItem>
                 <Navbar.Form pullRight><Logout/></Navbar.Form>
               </Nav>
           </Navbar>
