@@ -42,9 +42,9 @@ export default React.createClass({
   makeArgsString: function(argObj = {}) {
     // compiles all arguments and parameters into a string for the request
     // argObj: an object of keys and values that correspond to arguments
-    // to be passed to the api. Both the keys and values must be strings 
+    // to be passed to the api. Both the keys and values must be strings
     //  example: {'animal': 'cat'}
-    // the key is automatically prepended so this does not need to go into 
+    // the key is automatically prepended so this does not need to go into
     // the argObj
 
     var argsString = '&key=' + key;
@@ -92,6 +92,7 @@ export default React.createClass({
           id: this.state.id
         };
         var getPetUrl = this.makeURL(getPet, argsGetPet)
+
         $.ajax({
           // then get the pet's profile
           url: getPetUrl,

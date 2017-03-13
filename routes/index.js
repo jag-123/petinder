@@ -68,12 +68,12 @@ router.post('/preferences', function(req, res) {
 				return;
 			}
 		});
-		res.json({
-			username: user.username,
-			name: user.name,
-			id: user._id,
-			preferences: user.preferences
-		});
+	});
+	res.json({
+		username: req.user.username,
+		name: req.user.name,
+		id: req.user._id,
+		preferences: req.user.preferences
 	});
 });
 
@@ -103,8 +103,6 @@ router.get('/logout', function(req, res) {
 
 
 //displays user matches on matches page
-//need to fix 2 bugs: prevent duplicates in user.matchedWithPfIds
-//and page refresh needs to happen before data appears
 
 router.get('/showmatches', function(req, res){
 	console.log(req.user);
@@ -119,7 +117,6 @@ router.get('/showmatches', function(req, res){
 					if (err){
 						console.error(err);
 					} else if (pet){
-						console.log((user.matchedWithPfIds).indexOf(pet.pfId));
 						if ((user.matchedWithPfIds).indexOf(pet.pfId) === -1){
 							user.matchedWithPfIds.push(pet.pfId);
 							user.save(function(err) {
@@ -132,7 +129,8 @@ router.get('/showmatches', function(req, res){
 				});
 			}
 		}
-		res.json({pfIds:user.matchedWithPfIds})
+		//sets unique elements in matchedWithPfIds array
+		res.json({pfIds:[...new Set(user.matchedWithPfIds)]})
 	})
 });
 

@@ -26656,9 +26656,9 @@
 
 	    // compiles all arguments and parameters into a string for the request
 	    // argObj: an object of keys and values that correspond to arguments
-	    // to be passed to the api. Both the keys and values must be strings 
+	    // to be passed to the api. Both the keys and values must be strings
 	    //  example: {'animal': 'cat'}
-	    // the key is automatically prepended so this does not need to go into 
+	    // the key is automatically prepended so this does not need to go into
 	    // the argObj
 
 	    var argsString = '&key=' + key;
@@ -26706,6 +26706,7 @@
 	          id: this.state.id
 	        };
 	        var getPetUrl = this.makeURL(getPet, argsGetPet);
+
 	        $.ajax({
 	          // then get the pet's profile
 	          url: getPetUrl,
@@ -47389,6 +47390,19 @@
 	exports.default = _react2.default.createClass({
 	  displayName: 'MatchPage',
 
+	  getInitialState: function getInitialState() {
+	    // default states
+	    return {
+	      alldata: {
+	        id: '',
+	        name: [],
+	        age: [],
+	        sex: [],
+	        size: [],
+	        image: []
+	      }
+	    };
+	  },
 	  makeArgsString: function makeArgsString() {
 	    var argObj = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
@@ -47417,7 +47431,7 @@
 	    var argsString = this.makeArgsString(argObj);
 	    return base + argsString + '&callback=?';
 	  },
-	  componentDidMount: function componentDidMount(event) {
+	  getMatches: function getMatches(event) {
 	    $.ajax({
 	      url: '/showmatches',
 	      dataType: 'json',
@@ -47425,47 +47439,74 @@
 	      type: 'GET',
 	      success: function (data) {
 	        this.setState({
-	          pfIds: data.pfIds
+	          alldata: { id: data.pfIds,
+	            name: this.state.alldata.name,
+	            age: this.state.alldata.age,
+	            sex: this.state.alldata.sex,
+	            size: this.state.alldata.size,
+	            image: this.state.alldata.image }
 	        });
-	        console.log(this.state, "state");
+	        //console.log(this.state, "state")
 	        var getPet = 'pet.get';
-	        var argsGetPet = {
-	          pfIds: this.state.id
-	        };
-	        var getPetUrl = this.makeURL(getPet, argsGetPet);
-	        $.ajax({
-	          // then get the pet's profile
-	          url: getPetUrl,
-	          type: 'GET',
-	          dataType: 'jsonp',
-	          crossDomain: true,
-	          success: function (data) {
-	            var base = data.petfinder.pet;
-	            if (base.media.photos !== undefined) {
-	              // if there is a picture list provided use the one in the middle
-	              var photo = base.media.photos.photo;
+
+	        for (var i = 0; i < this.state.alldata.id.length; i++) {
+	          var argsGetPet = {
+	            id: this.state.alldata.id[i]
+	          };
+
+	          var getPetUrl = this.makeURL(getPet, argsGetPet);
+	          $.ajax({
+	            // then get the pet's profile
+	            url: getPetUrl,
+	            type: 'GET',
+	            dataType: 'jsonp',
+	            crossDomain: true,
+	            success: function (data) {
+	              // console.log(data);
+	              var base = data.petfinder.pet;
+	              if (base.media.photos !== undefined) {
+	                // if there is a picture list provided use the one in the middle
+	                var photo = base.media.photos.photo;
+
+	                this.setState({
+	                  // gets a picture that is pretty often the right size...
+	                  alldata: { id: this.state.alldata.id,
+	                    name: this.state.alldata.name,
+	                    age: this.state.alldata.age,
+	                    sex: this.state.alldata.sex,
+	                    size: this.state.alldata.size,
+	                    image: this.state.alldata.image.concat([photo[Math.floor((photo.length - 1) / 2)].$t]) }
+	                });
+	              } else {
+	                // use the default image
+	                this.setState({
+	                  alldata: { id: this.state.alldata.id,
+	                    name: this.state.alldata.name,
+	                    age: this.state.alldata.age,
+	                    sex: this.state.alldata.sex,
+	                    size: this.state.alldata.size,
+	                    image: this.state.alldata.image.concat(this.getInitialState().image) }
+	                });
+	              }
+
 	              this.setState({
-	                // gets a picture that is pretty often the right size...
-	                image: photo[Math.floor((photo.length - 1) / 2)].$t
+	                alldata: { age: this.state.alldata.age.concat(base.age.$t),
+	                  name: this.state.alldata.name.concat(base.name.$t),
+	                  sex: this.state.alldata.sex.concat(base.sex.$t),
+	                  size: this.state.alldata.size.concat(base.size.$t),
+	                  image: this.state.alldata.image,
+	                  id: this.state.alldata.id }
 	              });
-	            } else {
-	              // use the default image
-	              this.setState({
-	                image: this.getInitialState().image
-	              });
-	            }
-	            this.setState({
-	              age: base.age.$t,
-	              name: base.name.$t,
-	              animal: base.animal.$t,
-	              sex: base.sex.$t,
-	              size: base.size.$t
-	            });
-	          }.bind(this),
-	          error: function () {
-	            alert(':(');
-	          }.bind(this)
-	        });
+
+	              //console.log(this.state)
+	            }.bind(this),
+	            error: function () {
+	              alert(':(');
+	            }.bind(this)
+	          });
+
+	          //console.log(argsGetPet)
+	        }
 	      }.bind(this),
 	      error: function () {
 	        alert(':(');
@@ -47473,14 +47514,12 @@
 	    });
 	  },
 	  render: function render() {
+	    console.log(this.state);
+
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement(
-	        'p',
-	        null,
-	        'test'
-	      )
+	      _react2.default.createElement('input', { type: 'button', value: 'get a pig', onClick: this.getMatches })
 	    );
 	  }
 	});
