@@ -67,12 +67,12 @@ router.post('/preferences', function(req, res) {
 				return;
 			}
 		});
-	});
-	res.json({
-		username: req.user.username,
-		name: req.user.name,
-		id: req.user._id,
-		preferences: req.user.preferences
+		res.json({
+			username: user.username,
+			name: user.name,
+			id: user._id,
+			preferences: user.preferences
+		});
 	});
 });
 
