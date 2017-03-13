@@ -58,10 +58,12 @@ export default class Preferences extends Component {
 			size: this.state.size,
 			sex: this.state.sex
 		}
+
+		var prefUpdate = this.props.prefhandler;
 		$.post('/preferences', preferenceData)
 			.done(function(data) {
+				prefUpdate(data.preferences);
 				browserHistory.push("/getpet");
-				console.log(data);
 			})
 			.error(function(err, status) {
 				console.error(status);

@@ -128,6 +128,9 @@ export default React.createClass({
       error: function() { alert(':('); }.bind(this)
     });
   },
+  componentWillMount: function() {
+    this.props.getuser();
+  },
   render: function() {
     return (
       <div>

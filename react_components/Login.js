@@ -6,7 +6,7 @@ export default React.createClass({
 	render: function() {
 		return(
 			<div>
-				<LoginLocal/>
+				<LoginLocal getuser={this.props.getuser}/>
 				<LoginFacebook/>
 				<RegisterNewUser/>
 			</div>

@@ -26745,6 +26745,9 @@
 	      }.bind(this)
 	    });
 	  },
+	  componentWillMount: function componentWillMount() {
+	    this.props.getuser();
+	  },
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
@@ -27231,7 +27234,7 @@
 			return _react2.default.createElement(
 				'div',
 				null,
-				_react2.default.createElement(_LoginLocal2.default, null),
+				_react2.default.createElement(_LoginLocal2.default, { getuser: this.props.getuser }),
 				_react2.default.createElement(_LoginFacebook2.default, null),
 				_react2.default.createElement(_RegisterNewUser2.default, null)
 			);
@@ -27285,12 +27288,13 @@
 	      username: this.state.username,
 	      password: this.state.password
 	    };
-	    // question: what do I do here? How do I display a different page in React?
-	    // Austin's answer: https://github.com/ReactTraining/react-router
+	    var getUser = this.props.getuser;
 	    $.post('/login', formData).done(function (data) {
 	      //redirects to preferences page
+	      // this.props.login();
+	      // console.log(this.props, 'login')
+	      getUser();
 	      _reactRouter.browserHistory.push("/preferences");
-	      console.log(data);
 	    }).error(function (err, status) {
 	      console.error(status);
 	    });
@@ -27603,6 +27607,10 @@
 
 	var _Logout2 = _interopRequireDefault(_Logout);
 
+	var _Login = __webpack_require__(242);
+
+	var _Login2 = _interopRequireDefault(_Login);
+
 	var _reactBootstrap = __webpack_require__(287);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -27629,8 +27637,7 @@
 	      userPrefs: []
 	    };
 	  },
-	  // update state with user data if someone is logged in
-	  componentDidMount: function componentDidMount() {
+	  getUser: function getUser() {
 	    $.ajax({
 	      url: '/user',
 	      dataType: 'json',
@@ -27651,12 +27658,26 @@
 	        //browserHistory.push("/userlogin");
 	      }.bind(this)
 	    });
+	    console.log('user got', this.state.userPrefs);
+	  },
+	  handlePrefChange: function handlePrefChange(prefs) {
+	    console.log(prefs, 'prefs');
+	    this.setState({
+	      userPrefs: prefs
+	    });
+	  },
+	  // update state with user data if someone is logged in
+	  componentDidMount: function componentDidMount() {
+	    this.getUser();
+	    console.log(this.state.userPrefs, mounted);
+	  },
+	  componentWillUpdate: function componentWillUpdate() {
+	    console.log(this.state.userPrefs[0], "will update");
 	  },
 	  // might need components to render for homepage... but this
 	  // is an idea for how it kinda might work...
 	  // anything rendered by this component shows up on EVERY PAGE
 	  render: function render() {
-	    console.log(this.state.username);
 	    if (this.state.username) {
 	      return _react2.default.createElement(
 	        'div',
@@ -27727,9 +27748,19 @@
 	          'p',
 	          null,
 	          'Welcome, ',
-	          this.state.name
+	          this.state.username
 	        ),
-	        _react2.default.cloneElement(this.props.children, { user: this.state.userId, prefs: this.state.userPrefs })
+	        _react2.default.createElement(
+	          'p',
+	          null,
+	          this.props.userId
+	        ),
+	        _react2.default.cloneElement(this.props.children, {
+	          user: this.state.userId,
+	          prefs: this.state.userPrefs,
+	          getuser: this.getUser,
+	          prefhandler: this.handlePrefChange
+	        })
 	      );
 	    } else {
 	      return _react2.default.createElement(
@@ -27741,17 +27772,16 @@
 	          'What a Pig'
 	        ),
 	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          'Log in to get started'
+	        ),
+	        _react2.default.createElement(
 	          'p',
 	          null,
-	          'Please ',
-	          _react2.default.createElement(
-	            _NavLink2.default,
-	            { to: '/userlogin' },
-	            'log in'
-	          ),
-	          ' to get started'
+	          this.state.userId
 	        ),
-	        this.props.children
+	        _react2.default.createElement(_Login2.default, { getuser: this.getUser })
 	      );
 	    }
 	  }
@@ -47011,9 +47041,11 @@
 					size: this.state.size,
 					sex: this.state.sex
 				};
+
+				var prefUpdate = this.props.prefhandler;
 				$.post('/preferences', preferenceData).done(function (data) {
+					prefUpdate(data.preferences);
 					_reactRouter.browserHistory.push("/getpet");
-					console.log(data);
 				}).error(function (err, status) {
 					console.error(status);
 				});

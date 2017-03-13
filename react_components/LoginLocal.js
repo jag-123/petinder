@@ -28,13 +28,14 @@ export default React.createClass({
       username: this.state.username,
       password: this.state.password
     }
-    // question: what do I do here? How do I display a different page in React?
-    // Austin's answer: https://github.com/ReactTraining/react-router
+    var getUser = this.props.getuser;
     $.post('/login', formData)
       .done(function(data) {
         //redirects to preferences page
+        // this.props.login();
+        // console.log(this.props, 'login')
+        getUser();
         browserHistory.push("/preferences");
-        console.log(data);
       })
       .error(function(err, status) {
         console.error(status);
