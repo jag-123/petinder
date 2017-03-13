@@ -7,7 +7,8 @@ var userSchema = mongoose.Schema({
 	username: String,
 	password: String,
 	preferences: [],
-	matchedWith: [String] // list of pet _id's from pet database
+	matchedWith: [String], // list of pet _id's from pet database
+	matchedWithPfIds: [String] //list of pf IDS
 	// data structure containing preferences
 });
 

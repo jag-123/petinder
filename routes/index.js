@@ -9,6 +9,7 @@ var router = express.Router();
 
 var User = require("../models/userModel");
 var Pet = require("../models/petModel");
+
 // returns the homepage
 // router.get('/', function(req, res, next) {
 // 	res.json({'text' : 'PeTinder'});
@@ -100,10 +101,39 @@ router.get('/logout', function(req, res) {
 	res.redirect('/userlogin');
 })
 
+
 //displays user matches on matches page
+//need to fix 2 bugs: prevent duplicates in user.matchedWithPfIds
+//and page refresh needs to happen before data appears
+
 router.get('/showmatches', function(req, res){
 	console.log(req.user);
-	res.json({pet: req.user.matchedWith});
+	User.findOne({"_id":req.user._id},function (err,user){
+		console.log(user);
+		if (err){
+			console.log(err)
+		} else {
+			for (var i=0; i<user.matchedWith.length; i++){
+				console.log(user.matchedWith[i]);
+				Pet.findOne({"_id":user.matchedWith[i]},function(err,pet){
+					if (err){
+						console.error(err);
+					} else if (pet){
+						console.log((user.matchedWithPfIds).indexOf(pet.pfId));
+						if ((user.matchedWithPfIds).indexOf(pet.pfId) === -1){
+							user.matchedWithPfIds.push(pet.pfId);
+							user.save(function(err) {
+								if(err) {
+									console.error(err);
+								}
+							});
+						}
+					}
+				});
+			}
+		}
+		res.json({pfIds:user.matchedWithPfIds})
+	})
 });
 
 router.post('/match', function(req, res) {
