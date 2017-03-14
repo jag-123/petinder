@@ -19,7 +19,8 @@ export default React.createClass({
 			name: this.props.match.name,
 			age: this.props.match.age,	
 			sex: this.props.match.sex,
-			size: this.props.match.size
+			size: this.props.match.size,
+			image: this.props.match.image
 		}
 
 		$.post('/match', matchData)

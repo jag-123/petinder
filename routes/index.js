@@ -153,6 +153,7 @@ router.post('/match', function(req, res) {
 						"sex": req.body.sex,
 						"size": req.body.size,
 						"pfId": req.body.petId,
+						"image": req.body.image,
 						"matchedWith": [req.body.user]
 					});
 
