@@ -129,9 +129,17 @@ router.get('/showmatches', function(req, res){
 				});
 			}
 		}
-		//sets unique elements in matchedWithPfIds array
-		res.json({pfIds:[...new Set(user.matchedWithPfIds)]})
-	})
+		var pfIds = [...new Set(user.matchedWithPfIds)];
+		Pet.find({"pfId":{$in:pfIds}},function(err,pet){
+			if (err){
+				console.error(err);
+			}
+			res.json({pets:pet})
+		})
+	});
+
+	//sets unique elements in matchedWithPfIds array
+	//res.json({pfIds:[...new Set(user.matchedWithPfIds)]})
 });
 
 router.post('/match', function(req, res) {
