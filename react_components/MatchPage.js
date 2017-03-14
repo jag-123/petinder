@@ -32,13 +32,15 @@ export default React.createClass({
   render: function() {
     var allPets = this.state.alldata.pets;
     console.log(allPets);
-    // this next line creates an error, b/c it is undefined after getInitialState
-    // console.log(allPets[0]);
+
     if (!allPets[0]){
      return <div>loading</div>
    } else {
      var petComponents = allPets.map(function(pet) {
-        return <div>{pet.name}</div>;
+        return <div>
+          <h3>{pet.name} {pet.age} {pet.sex}</h3>
+          <img src={pet.image} width="300"/>
+        </div>;
     });
     return <div>{petComponents}</div>;
    }

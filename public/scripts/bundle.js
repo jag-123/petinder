@@ -47385,8 +47385,7 @@
 	  render: function render() {
 	    var allPets = this.state.alldata.pets;
 	    console.log(allPets);
-	    // this next line creates an error, b/c it is undefined after getInitialState
-	    // console.log(allPets[0]);
+
 	    if (!allPets[0]) {
 	      return _react2.default.createElement(
 	        'div',
@@ -47398,7 +47397,16 @@
 	        return _react2.default.createElement(
 	          'div',
 	          null,
-	          pet.name
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            pet.name,
+	            ' ',
+	            pet.age,
+	            ' ',
+	            pet.sex
+	          ),
+	          _react2.default.createElement('img', { src: pet.image, width: '300' })
 	        );
 	      });
 	      return _react2.default.createElement(
