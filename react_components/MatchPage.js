@@ -49,13 +49,16 @@ export default React.createClass({
       cache: false,
       type: 'GET',
       success: function(data) {
+        console.log(data, '/showmatches');
         this.setState({
-            alldata: {id: data.pfIds,
+            alldata: {
+              id: data.pfIds,
               name:this.state.alldata.name,
               age:this.state.alldata.age,
               sex:this.state.alldata.sex,
               size:this.state.alldata.size,
-              image:this.state.alldata.image}
+              image:this.state.alldata.image
+            }
         });
         //console.log(this.state, "state")
         var getPet = 'pet.get';
@@ -64,7 +67,6 @@ export default React.createClass({
           var argsGetPet = {
             id: this.state.alldata.id[i]
           };
-
           var getPetUrl = this.makeURL(getPet, argsGetPet)
           $.ajax({
             // then get the pet's profile
@@ -125,7 +127,7 @@ export default React.createClass({
   render: function() {
     //being printed multiple times
     console.log(this.state)
-
+    var i = 0;
     return(
       <div>
         {/* {
@@ -136,6 +138,11 @@ export default React.createClass({
                   </div>
           })
         } */}
+        <div>
+                    {console.log(i += 1)}
+                    <h3>{this.state.alldata.name} {this.state.alldata.age} {this.state.alldata.sex}</h3>
+                    <img src={this.state.alldata.image} width="300"/>
+                  </div>
       </div>
     );
   }
