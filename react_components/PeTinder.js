@@ -4,15 +4,6 @@ import Logout from './Logout'
 import Login from './Login'
 import { Navbar, NavItem, NavDropdown, MenuItem, Nav } from 'react-bootstrap';
 
-// Ariana's to do in morning:
-// * figure out how to handle displays when user is/isn't logged in
-// (it's funky now)
-// * comb through code for consistency and clarity (comments!!!)
-// * split up larger chunks into separate components
-// * sort components into subfolders and make sure paths are updated
-// idea: maybe ONLY show a log in link (or something nicer looking) if
-// the user has not logged in yet
-
 // the wrapper for everything
 export default React.createClass({
   getInitialState: function() {
@@ -37,35 +28,28 @@ export default React.createClass({
               userId: data.id,
               userPrefs: data.preferences
           });
-          console.log(this.state.username, "state")
-          this.render;
       }.bind(this),
       failure: function(xhr, status, err) {
           console.error('GET /user', status, err.toString());
           //browserHistory.push("/userlogin");
       }.bind(this)
     });
-    console.log('user got', this.state.userPrefs);
+  },
+  componentWillMount: function() {
+    this.getUser();
   },
   handlePrefChange: function(prefs) {
-    console.log(prefs, 'prefs');
     this.setState({
       userPrefs: prefs
     });
-  },
-  // update state with user data if someone is logged in
-  componentDidMount: function() {
-    this.getUser();
-    console.log(this.state.userPrefs, mounted)
-  },
-  componentWillUpdate: function() {
-    console.log(this.state.userPrefs[0], "will update")
   },
   // might need components to render for homepage... but this
   // is an idea for how it kinda might work...
   // anything rendered by this component shows up on EVERY PAGE
   render: function() {
-    if (this.state.username){
+    console.log(this, 'render');
+    if (this.state.username !== null){
+      console.log(this.props, "props of PeTinder");
       return (
         <div>
           <Navbar>
@@ -82,14 +66,15 @@ export default React.createClass({
                 <Navbar.Form pullRight><Logout/></Navbar.Form>
               </Nav>
           </Navbar>
-          <p>Welcome, {this.state.username}</p>
-          <p>{this.props.userId}</p>
-          {React.cloneElement(this.props.children, {
-            user:this.state.userId, 
-            prefs:this.state.userPrefs, 
-            getuser:this.getUser,
-            prefhandler:this.handlePrefChange
-          })}
+          <p>{console.log(this.props.children, 'children')}</p>
+          { React.cloneElement(this.props.children, {
+              user:this.state.userId,
+              username: this.state.username,
+              prefs:this.state.userPrefs, 
+              getuser:this.getUser,
+              prefhandler:this.handlePrefChange
+            })
+          }
         </div>
       );
     } else {
@@ -97,7 +82,6 @@ export default React.createClass({
         <div>
           <h1>What a Pig</h1>
           <h3>Log in to get started</h3>
-          <p>{this.state.userId}</p>
           <Login getuser={this.getUser}/>
         </div>
       );
