@@ -130,13 +130,11 @@ export default React.createClass({
     });
   },
   componentWillMount: function() {
-    this.props.getuser();
+    this.randomPet();
   },
   render: function() {
     return (
       <div>
-        <input type="button" value="get a pig" onClick={this.randomPet}/>
-        <br/>
         <h3>{this.state.name} {this.state.age} {this.state.sex}</h3>
         <img src={this.state.image} width="300"/>
         <MatchButton next={this.randomPet} match={this.state} user={this.props.user}/>

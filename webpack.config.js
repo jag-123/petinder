@@ -37,19 +37,25 @@ module.exports = {
                     presets: ['react', 'es2015'],
                     // makes output more concise
                     plugins: ['transform-runtime'],
+                    // takes care of deoptimized issue
+                    compact: false,
                 }
             },
 
           //CSS loader: Allows you to import CSS files. This version runs postcss to add vendor prefixes. We also run the extract text plugin to bundle the css into its own single file
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract('style-loader', 'css-loader', 'postcss')
+                loader: ExtractTextPlugin.extract('style-loader', 'css-loader', 'postcss'),
+                // takes care of deoptimized issue
+                compact: false,
             },
 
             //Loader for .png and .jpg files
             {
                 test: /\.(png|jpg)$/,
-                loader: 'url-loader?limit=8192&name=./public/images/[hash].[ext]'
+                loader: 'url-loader?limit=8192&name=./public/images/[hash].[ext]',
+                // takes care of deoptimized issue
+                compact: false,
             }
         ]
     },

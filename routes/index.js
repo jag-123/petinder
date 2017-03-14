@@ -33,9 +33,8 @@ router.get('/user',
 		if(req.isAuthenticated()) {
 			return next();
 		} else {
-			console.log("not logged in");
+			res.json({username: null})
 		}
-		res.json({username: null})
 	}, function(req, res) {
 		res.json({
 			username:req.user.username,
@@ -68,12 +67,12 @@ router.post('/preferences', function(req, res) {
 				return;
 			}
 		});
-	});
-	res.json({
-		username: req.user.username,
-		name: req.user.name,
-		id: req.user._id,
-		preferences: req.user.preferences
+		res.json({
+			username: user.username,
+			name: user.name,
+			id: user._id,
+			preferences: user.preferences
+		});
 	});
 });
 
@@ -105,14 +104,11 @@ router.get('/logout', function(req, res) {
 //displays user matches on matches page
 
 router.get('/showmatches', function(req, res){
-	console.log(req.user);
 	User.findOne({"_id":req.user._id},function (err,user){
-		console.log(user);
 		if (err){
 			console.log(err)
 		} else {
 			for (var i=0; i<user.matchedWith.length; i++){
-				console.log(user.matchedWith[i]);
 				Pet.findOne({"_id":user.matchedWith[i]},function(err,pet){
 					if (err){
 						console.error(err);
