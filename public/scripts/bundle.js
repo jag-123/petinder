@@ -26806,7 +26806,8 @@
 				name: this.props.match.name,
 				age: this.props.match.age,
 				sex: this.props.match.sex,
-				size: this.props.match.size
+				size: this.props.match.size,
+				image: this.props.match.image
 			};
 
 			$.post('/match', matchData).done(this.props.next()) //next is randomPet from the GetPet component
@@ -47428,13 +47429,16 @@
 	      cache: false,
 	      type: 'GET',
 	      success: function (data) {
+	        console.log(data, '/showmatches');
 	        this.setState({
-	          alldata: { id: data.pfIds,
+	          alldata: {
+	            id: data.pfIds,
 	            name: this.state.alldata.name,
 	            age: this.state.alldata.age,
 	            sex: this.state.alldata.sex,
 	            size: this.state.alldata.size,
-	            image: this.state.alldata.image }
+	            image: this.state.alldata.image
+	          }
 	        });
 	        //console.log(this.state, "state")
 	        var getPet = 'pet.get';
@@ -47443,7 +47447,6 @@
 	          var argsGetPet = {
 	            id: this.state.alldata.id[i]
 	          };
-
 	          var getPetUrl = this.makeURL(getPet, argsGetPet);
 	          $.ajax({
 	            // then get the pet's profile
@@ -47506,8 +47509,26 @@
 	  render: function render() {
 	    //being printed multiple times
 	    console.log(this.state);
-
-	    return _react2.default.createElement('div', null);
+	    var i = 0;
+	    return _react2.default.createElement(
+	      'div',
+	      null,
+	      _react2.default.createElement(
+	        'div',
+	        null,
+	        console.log(i += 1),
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          this.state.alldata.name,
+	          ' ',
+	          this.state.alldata.age,
+	          ' ',
+	          this.state.alldata.sex
+	        ),
+	        _react2.default.createElement('img', { src: this.state.alldata.image, width: '300' })
+	      )
+	    );
 	  }
 	});
 
