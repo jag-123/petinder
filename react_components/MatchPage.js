@@ -108,7 +108,8 @@ export default React.createClass({
                   sex: this.state.alldata.sex.concat(base.sex.$t),
                   size: this.state.alldata.size.concat(base.size.$t),
                   image:this.state.alldata.image,
-                  id:this.state.alldata.id}
+                  id:this.state.alldata.id
+                }
               });
 
               //console.log(this.state)
