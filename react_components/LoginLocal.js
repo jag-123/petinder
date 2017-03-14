@@ -32,8 +32,6 @@ export default React.createClass({
     $.post('/login', formData)
       .done(function(data) {
         //redirects to preferences page
-        // this.props.login();
-        // console.log(this.props, 'login')
         getUser();
         browserHistory.push("/preferences");
       })
