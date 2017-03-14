@@ -6,6 +6,7 @@ var petSchema = mongoose.Schema({
 	age: String,
 	sex: String,
 	size: String,
+	image: String,	// a url
 	matchedWith: [String]	// user _id
 });
 
