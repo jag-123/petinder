@@ -7,13 +7,13 @@ export default React.createClass({
   },
   render: function() {
     return (
-      <div>
-        <h2>Login with Facebook</h2>
+      <div className="fbLogin">
         <form action="/auth/facebook">
-        <input
+        <button
+          className="loginBtn loginBtn--facebook"
           type="submit"
           value="Login"
-        />
+        >Login with Facebook</button>
         </form>
       </div>
     );

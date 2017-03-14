@@ -27234,7 +27234,7 @@
 		render: function render() {
 			return _react2.default.createElement(
 				'div',
-				null,
+				{ className: 'wrapper' },
 				_react2.default.createElement(_LoginLocal2.default, { getuser: this.props.getuser }),
 				_react2.default.createElement(_LoginFacebook2.default, null),
 				_react2.default.createElement(_RegisterNewUser2.default, null)
@@ -27305,38 +27305,35 @@
 	      'div',
 	      null,
 	      _react2.default.createElement(
-	        'h2',
-	        null,
-	        'Login with username and password'
-	      ),
-	      _react2.default.createElement(
 	        'form',
-	        { id: 'local-login', onSubmit: this.login },
+	        { id: 'local-login', onSubmit: this.login, className: 'form-signin' },
 	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'Username: '
+	          'h2',
+	          { className: 'form-signin-heading' },
+	          'Login with username and password'
 	        ),
-	        _react2.default.createElement('input', {
+	        _react2.default.createElement('input', { className: 'form-control',
+	          placeholder: 'Username',
 	          type: 'text',
 	          value: this.state.username,
 	          onChange: this.updateNewUser
 	        }),
 	        _react2.default.createElement('br', null),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'Password: '
-	        ),
-	        _react2.default.createElement('input', {
+	        _react2.default.createElement('input', { className: 'form-control',
+	          placeholder: 'Password',
 	          type: 'password',
 	          value: this.state.password,
 	          onChange: this.updatePassword
 	        }),
-	        _react2.default.createElement('input', {
-	          type: 'submit',
-	          value: 'Login'
-	        })
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'button',
+	          { className: 'btn btn-lg btn-primary btn-block',
+	            type: 'submit',
+	            value: 'Login'
+	          },
+	          'Login'
+	        )
 	      )
 	    );
 	  }
@@ -27368,19 +27365,19 @@
 	  render: function render() {
 	    return _react2.default.createElement(
 	      "div",
-	      null,
-	      _react2.default.createElement(
-	        "h2",
-	        null,
-	        "Login with Facebook"
-	      ),
+	      { className: "fbLogin" },
 	      _react2.default.createElement(
 	        "form",
 	        { action: "/auth/facebook" },
-	        _react2.default.createElement("input", {
-	          type: "submit",
-	          value: "Login"
-	        })
+	        _react2.default.createElement(
+	          "button",
+	          {
+	            className: "loginBtn loginBtn--facebook",
+	            type: "submit",
+	            value: "Login"
+	          },
+	          "Login with Facebook"
+	        )
 	      )
 	    );
 	  }
@@ -27479,57 +27476,50 @@
 	      'div',
 	      null,
 	      _react2.default.createElement(
-	        'h2',
-	        null,
-	        'Register an account'
-	      ),
-	      _react2.default.createElement(
 	        'form',
-	        { id: 'register', onSubmit: this.register },
+	        { className: 'form-signin', id: 'register', onSubmit: this.register },
 	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'Name: '
+	          'h2',
+	          { className: 'form-signin-heading' },
+	          'Register an account'
 	        ),
-	        _react2.default.createElement('input', {
+	        _react2.default.createElement('input', { className: 'form-control',
+	          placeholder: 'Name',
 	          type: 'text',
 	          value: this.state.name,
 	          onChange: this.updateName
 	        }),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'Username: '
-	        ),
-	        _react2.default.createElement('input', {
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement('input', { className: 'form-control',
+	          placeholder: 'Username',
 	          type: 'text',
 	          value: this.state.username,
 	          onChange: this.updateUsername
 	        }),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'Password: '
-	        ),
-	        _react2.default.createElement('input', {
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement('input', { className: 'form-control',
+	          placeholder: 'Password',
 	          type: 'password',
 	          value: this.state.password,
 	          onChange: this.updatePassword
 	        }),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          'Confirm Password: '
-	        ),
-	        _react2.default.createElement('input', {
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement('input', { className: 'form-control',
+	          placeholder: 'Confirm Password',
 	          type: 'password',
 	          value: this.state.confirmPassword,
 	          onChange: this.matchPasswords
 	        }),
-	        _react2.default.createElement('input', {
-	          type: 'submit',
-	          value: 'Register'
-	        })
+	        _react2.default.createElement('br', null),
+	        _react2.default.createElement(
+	          'button',
+	          {
+	            className: 'btn btn-lg btn-primary btn-block',
+	            type: 'submit',
+	            value: 'Register'
+	          },
+	          'Register'
+	        )
 	      )
 	    );
 	  }
@@ -47431,7 +47421,7 @@
 	    var argsString = this.makeArgsString(argObj);
 	    return base + argsString + '&callback=?';
 	  },
-	  getMatches: function getMatches(event) {
+	  componentWillMount: function componentWillMount(event) {
 	    $.ajax({
 	      url: '/showmatches',
 	      dataType: 'json',
@@ -47514,13 +47504,10 @@
 	    });
 	  },
 	  render: function render() {
+	    //being printed multiple times
 	    console.log(this.state);
 
-	    return _react2.default.createElement(
-	      'div',
-	      null,
-	      _react2.default.createElement('input', { type: 'button', value: 'get a pig', onClick: this.getMatches })
-	    );
+	    return _react2.default.createElement('div', null);
 	  }
 	});
 

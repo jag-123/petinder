@@ -5,7 +5,7 @@ import RegisterNewUser from './RegisterNewUser'
 export default React.createClass({
 	render: function() {
 		return(
-			<div>
+			<div className="wrapper">
 				<LoginLocal getuser={this.props.getuser}/>
 				<LoginFacebook/>
 				<RegisterNewUser/>

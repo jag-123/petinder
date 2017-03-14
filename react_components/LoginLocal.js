@@ -44,25 +44,26 @@ export default React.createClass({
 	render: function() {
 		return (
 			<div>
-        <h2>Login with username and password</h2>
-        <form id="local-login" onSubmit={this.login}>
-          <p>Username: </p>
-          <input
+        <form id="local-login" onSubmit={this.login} className="form-signin">
+          <h2 className="form-signin-heading">Login with username and password</h2>
+          <input className="form-control"
+            placeholder="Username"
             type="text"
             value={this.state.username}
             onChange={this.updateNewUser}
           />
           <br/>
-          <p>Password: </p>
-          <input
+          <input className="form-control"
+            placeholder="Password"
             type="password"
             value={this.state.password}
             onChange={this.updatePassword}
           />
-          <input
+          <br/>
+          <button className="btn btn-lg btn-primary btn-block"
             type="submit"
             value="Login"
-          />
+          >Login</button>
         </form>
 			</div>
 		);

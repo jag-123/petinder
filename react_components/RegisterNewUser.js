@@ -75,36 +75,41 @@ export default React.createClass({
   render: function() {
     return (
       <div>
-        <h2>Register an account</h2>
-        <form id="register" onSubmit={this.register}>
-          <p>Name: </p>
-          <input
+        <form className="form-signin" id="register" onSubmit={this.register}>
+          <h2 className="form-signin-heading">Register an account</h2>
+          <input className="form-control"
+            placeholder="Name"
             type="text"
             value={this.state.name}
             onChange={this.updateName}
           />
-          <p>Username: </p>
-          <input
+          <br/>
+          <input className="form-control"
+            placeholder="Username"
             type="text"
             value={this.state.username}
             onChange={this.updateUsername}
           />
-          <p>Password: </p>
-          <input
+          <br/>
+          <input className="form-control"
+            placeholder="Password"
             type="password"
             value={this.state.password}
             onChange={this.updatePassword}
           />
-          <p>Confirm Password: </p>
-          <input
+          <br/>
+          <input className="form-control"
+            placeholder="Confirm Password"
             type="password"
             value={this.state.confirmPassword}
             onChange={this.matchPasswords}
           />
-          <input
+          <br/>
+          <button
+            className="btn btn-lg btn-primary btn-block"
             type="submit"
             value="Register"
-          />
+          >Register</button>
         </form>
       </div>
     )

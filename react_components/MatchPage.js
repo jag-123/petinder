@@ -129,7 +129,7 @@ export default React.createClass({
     return(
       <div>
         {/* {
-          this.state.alldata.id.map(function(pet){
+          this.state.alldata.age.map(function(pet){
             return <div>
                     <h3>{this.state.alldata.name} {this.state.alldata.age} {this.state.alldata.sex}</h3>
                     <img src={this.state.alldata.image} width="300"/>
