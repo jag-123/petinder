@@ -26577,12 +26577,16 @@
 
 	var _MatchPage2 = _interopRequireDefault(_MatchPage);
 
+	var _Home = __webpack_require__(510);
+
+	var _Home2 = _interopRequireDefault(_Home);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	module.exports = _react2.default.createElement(
 		_reactRouter.Route,
 		{ path: '/', component: _PeTinder2.default },
-		_react2.default.createElement(_reactRouter.Route, { path: '/userlogin', component: _Login2.default }),
+		_react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
 		_react2.default.createElement(_reactRouter.Route, { path: '/preferences', component: _Preferences2.default }),
 		_react2.default.createElement(_reactRouter.Route, { path: '/getpet', component: _GetPet2.default }),
 		_react2.default.createElement(_reactRouter.Route, { path: '/matches', component: _MatchPage2.default })
@@ -26747,14 +26751,12 @@
 	    });
 	  },
 	  componentWillMount: function componentWillMount() {
-	    this.props.getuser();
+	    this.randomPet();
 	  },
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement('input', { type: 'button', value: 'get a pig', onClick: this.randomPet }),
-	      _react2.default.createElement('br', null),
 	      _react2.default.createElement(
 	        'h3',
 	        null,
@@ -27293,8 +27295,6 @@
 	    var getUser = this.props.getuser;
 	    $.post('/login', formData).done(function (data) {
 	      //redirects to preferences page
-	      // this.props.login();
-	      // console.log(this.props, 'login')
 	      getUser();
 	      _reactRouter.browserHistory.push("/preferences");
 	    }).error(function (err, status) {
@@ -27607,15 +27607,6 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// Ariana's to do in morning:
-	// * figure out how to handle displays when user is/isn't logged in
-	// (it's funky now)
-	// * comb through code for consistency and clarity (comments!!!)
-	// * split up larger chunks into separate components
-	// * sort components into subfolders and make sure paths are updated
-	// idea: maybe ONLY show a log in link (or something nicer looking) if
-	// the user has not logged in yet
-
 	// the wrapper for everything
 	exports.default = _react2.default.createClass({
 	  displayName: 'PeTinder',
@@ -27642,35 +27633,28 @@
 	          userId: data.id,
 	          userPrefs: data.preferences
 	        });
-	        console.log(this.state.username, "state");
-	        this.render;
 	      }.bind(this),
 	      failure: function (xhr, status, err) {
 	        console.error('GET /user', status, err.toString());
 	        //browserHistory.push("/userlogin");
 	      }.bind(this)
 	    });
-	    console.log('user got', this.state.userPrefs);
+	  },
+	  componentWillMount: function componentWillMount() {
+	    this.getUser();
 	  },
 	  handlePrefChange: function handlePrefChange(prefs) {
-	    console.log(prefs, 'prefs');
 	    this.setState({
 	      userPrefs: prefs
 	    });
-	  },
-	  // update state with user data if someone is logged in
-	  componentDidMount: function componentDidMount() {
-	    this.getUser();
-	    console.log(this.state.userPrefs, mounted);
-	  },
-	  componentWillUpdate: function componentWillUpdate() {
-	    console.log(this.state.userPrefs[0], "will update");
 	  },
 	  // might need components to render for homepage... but this
 	  // is an idea for how it kinda might work...
 	  // anything rendered by this component shows up on EVERY PAGE
 	  render: function render() {
-	    if (this.state.username) {
+	    console.log(this, 'render');
+	    if (this.state.username !== null) {
+	      console.log(this.props, "props of PeTinder");
 	      return _react2.default.createElement(
 	        'div',
 	        null,
@@ -27739,16 +27723,11 @@
 	        _react2.default.createElement(
 	          'p',
 	          null,
-	          'Welcome, ',
-	          this.state.username
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          this.props.userId
+	          console.log(this.props.children, 'children')
 	        ),
 	        _react2.default.cloneElement(this.props.children, {
 	          user: this.state.userId,
+	          username: this.state.username,
 	          prefs: this.state.userPrefs,
 	          getuser: this.getUser,
 	          prefhandler: this.handlePrefChange
@@ -27767,11 +27746,6 @@
 	          'h3',
 	          null,
 	          'Log in to get started'
-	        ),
-	        _react2.default.createElement(
-	          'p',
-	          null,
-	          this.state.userId
 	        ),
 	        _react2.default.createElement(_Login2.default, { getuser: this.getUser })
 	      );
@@ -47488,7 +47462,8 @@
 	                  sex: this.state.alldata.sex.concat(base.sex.$t),
 	                  size: this.state.alldata.size.concat(base.size.$t),
 	                  image: this.state.alldata.image,
-	                  id: this.state.alldata.id }
+	                  id: this.state.alldata.id
+	                }
 	              });
 
 	              //console.log(this.state)
@@ -47530,6 +47505,39 @@
 	      )
 	    );
 	  }
+	});
+
+/***/ },
+/* 510 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+		displayName: 'Home',
+
+		render: function render() {
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(
+					'p',
+					null,
+					'Welcome, ',
+					this.props.username
+				)
+			);
+		}
 	});
 
 /***/ }
