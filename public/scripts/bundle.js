@@ -47536,7 +47536,7 @@
 		render: function render() {
 			return _react2.default.createElement(
 				'div',
-				{ className: 'col-lg-8' },
+				{ className: 'row' },
 				_react2.default.createElement(
 					'div',
 					{ className: 'text-center' },
