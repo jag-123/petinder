@@ -74,7 +74,8 @@ export default class Preferences extends Component {
 		var size = this.state.size;
 		var sex = this.state.sex;
 		return (
-			<div className='container'>
+			<div className='row'>
+				<div className='col-md-4'>
 				<h3>Choose your pets:</h3>
 				<div className='checkbox'>
 				<label>
@@ -164,66 +165,71 @@ export default class Preferences extends Component {
         </label>
         </div>
 
-				<br />
-				Your Pets: {pet.join(', ')}
+		<br />
+		Your Pets: {pet.join(', ')}
+		</div>
+		<div className='col-md-4'>
+		<h3>Choose your sizes:</h3>
+		<div className='checkbox'>
+		<label>
+			<input type='checkbox' value='S' checked={size.indexOf('S') !== -1} onChange={this.handleSizeChange} />
+			Small
+		</label>
+		</div>
 
-				<h3>Choose your sizes:</h3>
-				<div className='checkbox'>
-				<label>
-					<input type='checkbox' value='S' checked={size.indexOf('S') !== -1} onChange={this.handleSizeChange} />
-					Small
-				</label>
-				</div>
+		<div className='checkbox'>
+		<label>
+			<input type='checkbox' value='M' checked={size.indexOf('M') !== -1} onChange={this.handleSizeChange} />
+			Medium
+		</label>
+		</div>
 
-				<div className='checkbox'>
-				<label>
-					<input type='checkbox' value='M' checked={size.indexOf('M') !== -1} onChange={this.handleSizeChange} />
-					Medium
-				</label>
-				</div>
+		<div className='checkbox'>
+		<label>
+			<input type='checkbox' value='L' checked={size.indexOf('L') !== -1} onChange={this.handleSizeChange} />
+			Large
+		</label>
+		</div>
 
-				<div className='checkbox'>
-				<label>
-					<input type='checkbox' value='L' checked={size.indexOf('L') !== -1} onChange={this.handleSizeChange} />
-					Large
-				</label>
-				</div>
+		<div className='checkbox'>
+		<label>
+			<input type='checkbox' value='XL' checked={size.indexOf('XL') !== -1} onChange={this.handleSizeChange} />
+			XL
+		</label>
+		</div>
 
-				<div className='checkbox'>
-				<label>
-					<input type='checkbox' value='XL' checked={size.indexOf('XL') !== -1} onChange={this.handleSizeChange} />
-					XL
-				</label>
-				</div>
-
-				<br />
-				Your Sizes: {size.join(', ')}
-
-				<h3>Choose your sexes:</h3>
-				<div className='checkbox'>
-				<label>
-					<input type='checkbox' value='M' checked={sex.indexOf('M') !== -1} onChange={this.handleSexChange} />
-					Male
-				</label>
-				</div>
-
-				<div className='checkbox'>
-				<label>
-					<input type='checkbox' value='F' checked={sex.indexOf('F') !== -1} onChange={this.handleSexChange} />
-					Female
-				</label>
-				</div>
-
-				<br />
-				Your Sexes: {sex.join(', ')}
-
-				<br />
-
-				<form id="preference-page" onSubmit={this.submitPage}>
-					<input type="submit" value="Submit"/>
-				</form>
-
+		<br />
+		Your Sizes: {size.join(', ')}
+		</div>
+		<div className='col-md-4'>
+			<h3>Choose your sexes:</h3>
+			<div className='checkbox'>
+			<label>
+				<input type='checkbox' value='M' checked={sex.indexOf('M') !== -1} onChange={this.handleSexChange} />
+				Male
+			</label>
 			</div>
+
+			<div className='checkbox'>
+			<label>
+				<input type='checkbox' value='F' checked={sex.indexOf('F') !== -1} onChange={this.handleSexChange} />
+				Female
+			</label>
+			</div>
+
+			<br />
+			Your Sexes: {sex.join(', ')}
+		</div>
+
+		<br />
+		<div className='row col-md-12'>
+			<div className='text-center'>
+				<form id="preference-page" onSubmit={this.submitPage}>
+						<button className='btn btn-lg btn-primary' type="submit" value="Submit">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
 		)
 	}
 }

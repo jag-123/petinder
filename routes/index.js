@@ -102,7 +102,6 @@ router.get('/logout', function(req, res) {
 
 
 //displays user matches on matches page
-
 router.get('/showmatches', function(req, res){
 	User.findOne({"_id":req.user._id},function (err,user){
 		if (err){
@@ -125,6 +124,7 @@ router.get('/showmatches', function(req, res){
 				});
 			}
 		}
+		//sets unique elements in matchedWithPfIds array
 		var pfIds = [...new Set(user.matchedWithPfIds)];
 		Pet.find({"pfId":{$in:pfIds}},function(err,pet){
 			if (err){
@@ -133,9 +133,11 @@ router.get('/showmatches', function(req, res){
 			res.json({pets:pet})
 		})
 	});
+});
 
-	//sets unique elements in matchedWithPfIds array
-	//res.json({pfIds:[...new Set(user.matchedWithPfIds)]})
+//removes match from matchedWith field
+router.get('/deletematch',function(req,res){
+	console.log(req)
 });
 
 router.post('/match', function(req, res) {

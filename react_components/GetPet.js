@@ -134,11 +134,13 @@ export default React.createClass({
   },
   render: function() {
     return (
-      <div>
-        <h3>{this.state.name} {this.state.age} {this.state.sex}</h3>
-        <img src={this.state.image} width="300"/>
-        <MatchButton next={this.randomPet} match={this.state} user={this.props.user}/>
+      <div className="row content">
         <NextButton next={this.randomPet}/>
+        <div className="col-sm-4 text-center">
+          <h3>{this.state.name} {this.state.age} {this.state.sex}</h3>
+          <img src={this.state.image} width="300"/>
+        </div>
+        <MatchButton next={this.randomPet} match={this.state} user={this.props.user}/>
       </div>
     )
   }

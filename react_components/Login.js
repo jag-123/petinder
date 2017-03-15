@@ -7,7 +7,10 @@ export default React.createClass({
 		return(
 			<div className="wrapper">
 				<LoginLocal getuser={this.props.getuser}/>
+				<br/>
 				<LoginFacebook/>
+				<br/>
+				<br/>
 				<RegisterNewUser/>
 			</div>
 		)

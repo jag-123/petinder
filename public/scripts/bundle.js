@@ -26577,7 +26577,7 @@
 
 	var _MatchPage2 = _interopRequireDefault(_MatchPage);
 
-	var _Home = __webpack_require__(510);
+	var _Home = __webpack_require__(511);
 
 	var _Home2 = _interopRequireDefault(_Home);
 
@@ -26756,19 +26756,23 @@
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      null,
+	      { className: 'row content' },
+	      _react2.default.createElement(_NextButton2.default, { next: this.randomPet }),
 	      _react2.default.createElement(
-	        'h3',
-	        null,
-	        this.state.name,
-	        ' ',
-	        this.state.age,
-	        ' ',
-	        this.state.sex
+	        'div',
+	        { className: 'col-sm-4 text-center' },
+	        _react2.default.createElement(
+	          'h3',
+	          null,
+	          this.state.name,
+	          ' ',
+	          this.state.age,
+	          ' ',
+	          this.state.sex
+	        ),
+	        _react2.default.createElement('img', { src: this.state.image, width: '300' })
 	      ),
-	      _react2.default.createElement('img', { src: this.state.image, width: '300' }),
-	      _react2.default.createElement(_MatchButton2.default, { next: this.randomPet, match: this.state, user: this.props.user }),
-	      _react2.default.createElement(_NextButton2.default, { next: this.randomPet })
+	      _react2.default.createElement(_MatchButton2.default, { next: this.randomPet, match: this.state, user: this.props.user })
 	    );
 	  }
 	});
@@ -26797,7 +26801,7 @@
 		},
 		saveMatch: function saveMatch(event) {
 			// save the pet in the database, save the user
-			// in the pet's matches, save the pet in the 
+			// in the pet's matches, save the pet in the
 			// user's matches
 			event.preventDefault();
 
@@ -26818,8 +26822,12 @@
 		render: function render() {
 			return _react2.default.createElement(
 				'div',
-				null,
-				_react2.default.createElement('input', { type: 'button', value: 'swipe right', onClick: this.saveMatch })
+				{ className: 'col-sm-4 sidenav' },
+				_react2.default.createElement(
+					'button',
+					{ className: 'slide slide-right', type: 'button', value: 'swipe right', onClick: this.saveMatch },
+					'\xA0'
+				)
 			);
 		}
 	}); // the "swipe right" button. If this one is pressed, the match is saved in the pet and user databases.
@@ -26850,8 +26858,12 @@
 		render: function render() {
 			return _react2.default.createElement(
 				"div",
-				null,
-				_react2.default.createElement("input", { type: "button", value: "swipe left", onClick: this.nextPet })
+				{ className: "col-sm-4 text-right sidenav" },
+				_react2.default.createElement(
+					"button",
+					{ className: "slide slide-left", type: "button", value: "swipe left", onClick: this.nextPet },
+					"\xA0"
+				)
 			);
 		}
 	});
@@ -27239,7 +27251,10 @@
 				'div',
 				{ className: 'wrapper' },
 				_react2.default.createElement(_LoginLocal2.default, { getuser: this.props.getuser }),
+				_react2.default.createElement('br', null),
 				_react2.default.createElement(_LoginFacebook2.default, null),
+				_react2.default.createElement('br', null),
+				_react2.default.createElement('br', null),
 				_react2.default.createElement(_RegisterNewUser2.default, null)
 			);
 		}
@@ -27564,14 +27579,15 @@
 	  render: function render() {
 	    return _react2.default.createElement(
 	      'div',
-	      null,
+	      { className: 'text-left' },
 	      _react2.default.createElement(
 	        'form',
-	        { onSubmit: this.logout },
-	        _react2.default.createElement('input', {
-	          type: 'submit',
-	          value: 'Logout'
-	        })
+	        { className: 'form-inline', onSubmit: this.logout },
+	        _react2.default.createElement(
+	          'button',
+	          { className: 'btn btn-outline-success my-2 my-sm-0', type: 'submit', value: 'Logout' },
+	          'Logout'
+	        )
 	      )
 	    );
 	  }
@@ -27736,16 +27752,20 @@
 	    } else {
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { className: 'row' },
 	        _react2.default.createElement(
-	          'h1',
-	          null,
-	          'What a Pig'
-	        ),
-	        _react2.default.createElement(
-	          'h3',
-	          null,
-	          'Log in to get started'
+	          'div',
+	          { className: 'text-center' },
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            'What a Pig'
+	          ),
+	          _react2.default.createElement(
+	            'h3',
+	            null,
+	            'Log in to get started'
+	          )
 	        ),
 	        _react2.default.createElement(_Login2.default, { getuser: this.getUser })
 	      );
@@ -47024,208 +47044,232 @@
 				var sex = this.state.sex;
 				return _react2.default.createElement(
 					'div',
-					{ className: 'container' },
+					{ className: 'row' },
 					_react2.default.createElement(
-						'h3',
-						null,
-						'Choose your pets:'
+						'div',
+						{ className: 'col-md-4' },
+						_react2.default.createElement(
+							'h3',
+							null,
+							'Choose your pets:'
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'checkbox' },
+							_react2.default.createElement(
+								'label',
+								null,
+								_react2.default.createElement('input', {
+									type: 'checkbox',
+									value: 'cat',
+									checked: pet.indexOf('cat') !== -1,
+									onChange: this.handlePetChange }),
+								'Cat'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'checkbox' },
+							_react2.default.createElement(
+								'label',
+								null,
+								_react2.default.createElement('input', {
+									type: 'checkbox',
+									value: 'dog',
+									checked: pet.indexOf('dog') !== -1,
+									onChange: this.handlePetChange }),
+								'Dog'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'checkbox' },
+							_react2.default.createElement(
+								'label',
+								null,
+								_react2.default.createElement('input', {
+									type: 'checkbox',
+									value: 'barnyard',
+									checked: pet.indexOf('barnyard') !== -1,
+									onChange: this.handlePetChange }),
+								'Barnyard'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'checkbox' },
+							_react2.default.createElement(
+								'label',
+								null,
+								_react2.default.createElement('input', {
+									type: 'checkbox',
+									value: 'bird',
+									checked: pet.indexOf('bird') !== -1,
+									onChange: this.handlePetChange }),
+								'Bird'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'checkbox' },
+							_react2.default.createElement(
+								'label',
+								null,
+								_react2.default.createElement('input', {
+									type: 'checkbox',
+									value: 'horse',
+									checked: pet.indexOf('horse') !== -1,
+									onChange: this.handlePetChange }),
+								'Horse'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'checkbox' },
+							_react2.default.createElement(
+								'label',
+								null,
+								_react2.default.createElement('input', {
+									type: 'checkbox',
+									value: 'pig',
+									checked: pet.indexOf('pig') !== -1,
+									onChange: this.handlePetChange }),
+								'Pig'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'checkbox' },
+							_react2.default.createElement(
+								'label',
+								null,
+								_react2.default.createElement('input', {
+									type: 'checkbox',
+									value: 'reptile',
+									checked: pet.indexOf('reptile') !== -1,
+									onChange: this.handlePetChange }),
+								'Reptile'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'checkbox' },
+							_react2.default.createElement(
+								'label',
+								null,
+								_react2.default.createElement('input', {
+									type: 'checkbox',
+									value: 'smallfurry',
+									checked: pet.indexOf('smallfurry') !== -1,
+									onChange: this.handlePetChange }),
+								'Smallfurry'
+							)
+						),
+						_react2.default.createElement('br', null),
+						'Your Pets: ',
+						pet.join(', ')
 					),
 					_react2.default.createElement(
 						'div',
-						{ className: 'checkbox' },
+						{ className: 'col-md-4' },
 						_react2.default.createElement(
-							'label',
+							'h3',
 							null,
-							_react2.default.createElement('input', {
-								type: 'checkbox',
-								value: 'cat',
-								checked: pet.indexOf('cat') !== -1,
-								onChange: this.handlePetChange }),
-							'Cat'
-						)
+							'Choose your sizes:'
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'checkbox' },
+							_react2.default.createElement(
+								'label',
+								null,
+								_react2.default.createElement('input', { type: 'checkbox', value: 'S', checked: size.indexOf('S') !== -1, onChange: this.handleSizeChange }),
+								'Small'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'checkbox' },
+							_react2.default.createElement(
+								'label',
+								null,
+								_react2.default.createElement('input', { type: 'checkbox', value: 'M', checked: size.indexOf('M') !== -1, onChange: this.handleSizeChange }),
+								'Medium'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'checkbox' },
+							_react2.default.createElement(
+								'label',
+								null,
+								_react2.default.createElement('input', { type: 'checkbox', value: 'L', checked: size.indexOf('L') !== -1, onChange: this.handleSizeChange }),
+								'Large'
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'checkbox' },
+							_react2.default.createElement(
+								'label',
+								null,
+								_react2.default.createElement('input', { type: 'checkbox', value: 'XL', checked: size.indexOf('XL') !== -1, onChange: this.handleSizeChange }),
+								'XL'
+							)
+						),
+						_react2.default.createElement('br', null),
+						'Your Sizes: ',
+						size.join(', ')
 					),
 					_react2.default.createElement(
 						'div',
-						{ className: 'checkbox' },
+						{ className: 'col-md-4' },
 						_react2.default.createElement(
-							'label',
+							'h3',
 							null,
-							_react2.default.createElement('input', {
-								type: 'checkbox',
-								value: 'dog',
-								checked: pet.indexOf('dog') !== -1,
-								onChange: this.handlePetChange }),
-							'Dog'
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'checkbox' },
+							'Choose your sexes:'
+						),
 						_react2.default.createElement(
-							'label',
-							null,
-							_react2.default.createElement('input', {
-								type: 'checkbox',
-								value: 'barnyard',
-								checked: pet.indexOf('barnyard') !== -1,
-								onChange: this.handlePetChange }),
-							'Barnyard'
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'checkbox' },
+							'div',
+							{ className: 'checkbox' },
+							_react2.default.createElement(
+								'label',
+								null,
+								_react2.default.createElement('input', { type: 'checkbox', value: 'M', checked: sex.indexOf('M') !== -1, onChange: this.handleSexChange }),
+								'Male'
+							)
+						),
 						_react2.default.createElement(
-							'label',
-							null,
-							_react2.default.createElement('input', {
-								type: 'checkbox',
-								value: 'bird',
-								checked: pet.indexOf('bird') !== -1,
-								onChange: this.handlePetChange }),
-							'Bird'
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'checkbox' },
-						_react2.default.createElement(
-							'label',
-							null,
-							_react2.default.createElement('input', {
-								type: 'checkbox',
-								value: 'horse',
-								checked: pet.indexOf('horse') !== -1,
-								onChange: this.handlePetChange }),
-							'Horse'
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'checkbox' },
-						_react2.default.createElement(
-							'label',
-							null,
-							_react2.default.createElement('input', {
-								type: 'checkbox',
-								value: 'pig',
-								checked: pet.indexOf('pig') !== -1,
-								onChange: this.handlePetChange }),
-							'Pig'
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'checkbox' },
-						_react2.default.createElement(
-							'label',
-							null,
-							_react2.default.createElement('input', {
-								type: 'checkbox',
-								value: 'reptile',
-								checked: pet.indexOf('reptile') !== -1,
-								onChange: this.handlePetChange }),
-							'Reptile'
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'checkbox' },
-						_react2.default.createElement(
-							'label',
-							null,
-							_react2.default.createElement('input', {
-								type: 'checkbox',
-								value: 'smallfurry',
-								checked: pet.indexOf('smallfurry') !== -1,
-								onChange: this.handlePetChange }),
-							'Smallfurry'
-						)
+							'div',
+							{ className: 'checkbox' },
+							_react2.default.createElement(
+								'label',
+								null,
+								_react2.default.createElement('input', { type: 'checkbox', value: 'F', checked: sex.indexOf('F') !== -1, onChange: this.handleSexChange }),
+								'Female'
+							)
+						),
+						_react2.default.createElement('br', null),
+						'Your Sexes: ',
+						sex.join(', ')
 					),
 					_react2.default.createElement('br', null),
-					'Your Pets: ',
-					pet.join(', '),
-					_react2.default.createElement(
-						'h3',
-						null,
-						'Choose your sizes:'
-					),
 					_react2.default.createElement(
 						'div',
-						{ className: 'checkbox' },
+						{ className: 'row col-md-12' },
 						_react2.default.createElement(
-							'label',
-							null,
-							_react2.default.createElement('input', { type: 'checkbox', value: 'S', checked: size.indexOf('S') !== -1, onChange: this.handleSizeChange }),
-							'Small'
+							'div',
+							{ className: 'text-center' },
+							_react2.default.createElement(
+								'form',
+								{ id: 'preference-page', onSubmit: this.submitPage },
+								_react2.default.createElement(
+									'button',
+									{ className: 'btn btn-lg btn-primary', type: 'submit', value: 'Submit' },
+									'Submit'
+								)
+							)
 						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'checkbox' },
-						_react2.default.createElement(
-							'label',
-							null,
-							_react2.default.createElement('input', { type: 'checkbox', value: 'M', checked: size.indexOf('M') !== -1, onChange: this.handleSizeChange }),
-							'Medium'
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'checkbox' },
-						_react2.default.createElement(
-							'label',
-							null,
-							_react2.default.createElement('input', { type: 'checkbox', value: 'L', checked: size.indexOf('L') !== -1, onChange: this.handleSizeChange }),
-							'Large'
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'checkbox' },
-						_react2.default.createElement(
-							'label',
-							null,
-							_react2.default.createElement('input', { type: 'checkbox', value: 'XL', checked: size.indexOf('XL') !== -1, onChange: this.handleSizeChange }),
-							'XL'
-						)
-					),
-					_react2.default.createElement('br', null),
-					'Your Sizes: ',
-					size.join(', '),
-					_react2.default.createElement(
-						'h3',
-						null,
-						'Choose your sexes:'
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'checkbox' },
-						_react2.default.createElement(
-							'label',
-							null,
-							_react2.default.createElement('input', { type: 'checkbox', value: 'M', checked: sex.indexOf('M') !== -1, onChange: this.handleSexChange }),
-							'Male'
-						)
-					),
-					_react2.default.createElement(
-						'div',
-						{ className: 'checkbox' },
-						_react2.default.createElement(
-							'label',
-							null,
-							_react2.default.createElement('input', { type: 'checkbox', value: 'F', checked: sex.indexOf('F') !== -1, onChange: this.handleSexChange }),
-							'Female'
-						)
-					),
-					_react2.default.createElement('br', null),
-					'Your Sexes: ',
-					sex.join(', '),
-					_react2.default.createElement('br', null),
-					_react2.default.createElement(
-						'form',
-						{ id: 'preference-page', onSubmit: this.submitPage },
-						_react2.default.createElement('input', { type: 'submit', value: 'Submit' })
 					)
 				);
 			}
@@ -47347,6 +47391,10 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _MatchDelete = __webpack_require__(510);
+
+	var _MatchDelete2 = _interopRequireDefault(_MatchDelete);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var auth = __webpack_require__(241);
@@ -47363,7 +47411,7 @@
 	      }
 	    };
 	  },
-	  componentWillMount: function componentWillMount(event) {
+	  componentDidMount: function componentDidMount(event) {
 	    $.ajax({
 	      url: '/showmatches',
 	      dataType: 'json',
@@ -47390,28 +47438,29 @@
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        'loading'
+	        'Save some pets'
 	      );
 	    } else {
 	      var petComponents = allPets.map(function (pet) {
 	        return _react2.default.createElement(
 	          'div',
-	          null,
+	          { className: 'col-lg-3 col-md-4 col-xs-6 thumb', key: pet._id },
 	          _react2.default.createElement(
 	            'h3',
-	            null,
+	            { className: 'text-center' },
 	            pet.name,
 	            ' ',
 	            pet.age,
 	            ' ',
 	            pet.sex
 	          ),
-	          _react2.default.createElement('img', { src: pet.image, width: '300' })
+	          _react2.default.createElement('img', { src: pet.image, width: '300', height: '200' }),
+	          _react2.default.createElement(_MatchDelete2.default, null)
 	        );
 	      });
 	      return _react2.default.createElement(
 	        'div',
-	        null,
+	        { className: 'row' },
 	        petComponents
 	      );
 	    }
@@ -47420,6 +47469,53 @@
 
 /***/ },
 /* 510 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = _react2.default.createClass({
+	  displayName: "MatchDelete",
+
+	  onError: function onError(err, status) {
+	    console.error(status);
+	  },
+	  deleteMatch: function deleteMatch(event) {
+	    console.log(this.state);
+	    console.log(this.props);
+	    // event.preventDefault();
+	    //
+	    // var matchData = {
+	    // }
+	    //
+	    // $.post('/match', matchData)
+	    // 	.done()
+	    // 	.error(this.onError);
+	  },
+	  render: function render() {
+	    return _react2.default.createElement(
+	      "div",
+	      { className: "text-center" },
+	      _react2.default.createElement(
+	        "button",
+	        { className: "slide slide-delete", type: "button", value: "Delete Match", onClick: this.deleteMatch },
+	        "Delete"
+	      )
+	    );
+	  }
+	}); // removes a pet from Matches page
+
+/***/ },
+/* 511 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -47440,12 +47536,16 @@
 		render: function render() {
 			return _react2.default.createElement(
 				'div',
-				null,
+				{ className: 'col-lg-8' },
 				_react2.default.createElement(
-					'p',
-					null,
-					'Welcome, ',
-					this.props.username
+					'div',
+					{ className: 'text-center' },
+					_react2.default.createElement(
+						'p',
+						null,
+						'Welcome, ',
+						this.props.username
+					)
 				)
 			);
 		}

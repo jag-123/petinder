@@ -79,9 +79,11 @@ export default React.createClass({
       );
     } else {
       return (
-        <div>
-          <h1>What a Pig</h1>
-          <h3>Log in to get started</h3>
+        <div className='row'>
+          <div className='text-center'>
+            <h1>What a Pig</h1>
+            <h3>Log in to get started</h3>
+          </div>
           <Login getuser={this.getUser}/>
         </div>
       );

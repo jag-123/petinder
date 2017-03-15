@@ -20,12 +20,9 @@ export default React.createClass({
   },
   render: function() {
     return (
-      <div>
-        <form onSubmit={this.logout}>
-          <input
-            type="submit"
-            value="Logout"
-          />
+      <div className='text-left'>
+        <form className='form-inline' onSubmit={this.logout}>
+          <button className='btn btn-outline-success my-2 my-sm-0' type="submit"value="Logout">Logout</button>
         </form>
       </div>
     )

@@ -8,7 +8,7 @@ export default React.createClass({
 	},
 	saveMatch: function(event) {
 		// save the pet in the database, save the user
-		// in the pet's matches, save the pet in the 
+		// in the pet's matches, save the pet in the
 		// user's matches
 		event.preventDefault();
 
@@ -17,7 +17,7 @@ export default React.createClass({
 			// characteristics to save in the pet database
 			petId: this.props.match.id, // petfinder id
 			name: this.props.match.name,
-			age: this.props.match.age,	
+			age: this.props.match.age,
 			sex: this.props.match.sex,
 			size: this.props.match.size,
 			image: this.props.match.image
@@ -29,8 +29,8 @@ export default React.createClass({
 	},
 	render: function() {
 		return(
-			<div>
-				<input type="button" value="swipe right" onClick={this.saveMatch}/>
+			<div className="col-sm-4 sidenav">
+				<button className="slide slide-right" type="button" value="swipe right" onClick={this.saveMatch}>&nbsp;</button>
 			</div>
 		);
 	}
