@@ -2,9 +2,7 @@ import React from 'react';
 import MatchButton from './MatchButton'
 import NextButton from './NextButton'
 
-var md5 = require('md5'); // for hashing api signatures
 var auth = require('../auth');
-var secret = auth.PETFINDER_APP_SECRET; // can delete if makeSignature is deleted
 var key = auth.PETFINDER_APP_KEY;
 
 // starting api request stuff
@@ -29,15 +27,6 @@ export default React.createClass({
       size: this.props.prefs[0].size,
       sex: this.props.prefs[0].sex
     };
-  },
-  makeSignature: function(argsString) {
-    // this is for a secure connection which doesn't seem to work
-    // should probably just remove it
-    // args string: an api formatted string of arguments and values
-    // with the format &key=key&arg1=val1&arg2=val2 etc...
-
-    var sig = md5(secret + argsString);
-    return "&sig=" + sig;
   },
   makeArgsString: function(argObj = {}) {
     // compiles all arguments and parameters into a string for the request
