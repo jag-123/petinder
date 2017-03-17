@@ -1,3 +1,8 @@
+/*
+This component contains elements that should always be displayed when a user is logged in.
+Both the title of the app and a navigation bar are rendered.
+*/
+
 import React from 'react';
 import NavLink from './NavLink'
 import Logout from './Logout'
