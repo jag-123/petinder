@@ -1,3 +1,7 @@
+/*
+Form for logging in with a username and password. 
+*/
+
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
 
@@ -61,7 +65,9 @@ export default React.createClass({
           <button className="btn btn-lg btn-primary btn-block"
             type="submit"
             value="Login"
-          >Login</button>
+          >
+          Login
+          </button>
         </form>
 			</div>
 		);
