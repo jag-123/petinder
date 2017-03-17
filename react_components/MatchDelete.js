@@ -1,4 +1,6 @@
-// removes a pet from Matches page
+/* 
+removes a pet from Matches page
+*/
 import React from 'react';
 
 export default React.createClass({

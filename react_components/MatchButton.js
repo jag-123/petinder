@@ -1,5 +1,6 @@
-// the "swipe right" button. If this one is pressed, the match is saved in the pet and user databases.
-
+/* 
+The "swipe right" button. If this one is pressed the match is saved in the pet and user databases.
+*/
 import React from 'react';
 
 export default React.createClass({
