@@ -6,10 +6,6 @@ page.
 import React from 'react';
 
 export default React.createClass({
-  // nothing currently needs to be in the state
-  getInitialState: function() {
-    return {};
-  },
   render: function() {
     return (
       <div className="fbLogin">
