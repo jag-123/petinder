@@ -1,3 +1,7 @@
+/*
+The page that allows the usser to set their preferences for the animal,
+size, and sex.
+*/
 import React, { Component } from 'react';
 import { Link, browserHistory } from 'react-router';
 

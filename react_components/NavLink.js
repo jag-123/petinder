@@ -1,4 +1,6 @@
-// link component for navigation. Keeps track of which link is active
+/* 
+Link component for navigation. Keeps track of which link is active
+*/
 import React from 'react';
 import { Link } from 'react-router';
 

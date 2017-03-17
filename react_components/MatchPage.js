@@ -1,3 +1,6 @@
+/*
+
+*/
 import React from 'react';
 import MatchDelete from './MatchDelete';
 var auth = require('../auth');

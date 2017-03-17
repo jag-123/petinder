@@ -1,3 +1,8 @@
+/*
+The form that a new user fills out to register a new account. 
+The user provides their name, a username, a password, and confirms 
+their password.
+*/
 import React from 'react';
 
 // component for registering as a new user
@@ -25,7 +30,6 @@ export default React.createClass({
   },
   // updates current state to value of password field
   updatePassword: function(event) {
-    console.log(event.target.value);
     this.setState({
       password: event.target.value
     });
@@ -37,18 +41,19 @@ export default React.createClass({
       confirmPassword: event.target.value
     });
     if (event.target.value == this.state.password) {
-      console.log('they match!');
       this.setState({
         passwordMatch: true
       });
     } else {
-      console.log('no match')
       this.setState({
         passwordMatch: false
       });
     }
   },
   register: function(event) {
+    // if a password is provided and correctly verified
+    // the new user account information is sent to the user
+    // database and the account is created
     event.preventDefault();
     if (this.state.passwordMatch == false) {
       alert('Passwords do not match, please try again');
@@ -65,7 +70,6 @@ export default React.createClass({
 
       $.post('/register', formData)
         .done(function(data) {
-          console.log(data);
         })
         .error(function (err, status) {
           console.error(err, status);

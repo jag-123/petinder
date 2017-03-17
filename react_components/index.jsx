@@ -1,3 +1,8 @@
+/*
+The router is created. Components are rendered in the content
+div of index.html
+*/
+
 import React from 'react'
 import { render } from 'react-dom'
 import { Router, browserHistory } from 'react-router'
