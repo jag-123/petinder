@@ -1,3 +1,8 @@
+/*
+The page where the Tinder functionality manifests itself. A pet, chosen based on the preferences the user has set, 
+is displayed, and the user has the choice to either "swipe right" to save the pet to their matches or "swipe left"
+to move on to the next pet without saving it. 
+*/
 import React from 'react';
 import MatchButton from './MatchButton'
 import NextButton from './NextButton'
