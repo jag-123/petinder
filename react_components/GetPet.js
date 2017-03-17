@@ -63,6 +63,8 @@ export default React.createClass({
     for (var pref in this.getPreferences()) {
       if (this.getPreferences()[pref] !== undefined) {
         var prefsArr = this.getPreferences()[pref];
+        // the api does not seem to take multiple options for an argument, so instead 
+        // we just choose a random preference for each catagory instead
         argsGetRandom[pref] = prefsArr[Math.floor(Math.random()*prefsArr.length)];
       }
     }
@@ -92,6 +94,7 @@ export default React.createClass({
             var base = data.petfinder.pet;
             if (base.media.photos !== undefined) {
               // if there is a picture list provided use the one in the middle
+              // because it tends to be the right size
               var photo = base.media.photos.photo
               this.setState({
                 // gets a picture that is pretty often the right size...
@@ -119,6 +122,7 @@ export default React.createClass({
     });
   },
   componentWillMount: function() {
+    // this loads the first pet on the page for the user
     this.randomPet();
   },
   render: function() {
