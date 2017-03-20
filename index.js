@@ -25,8 +25,6 @@ mongoose.connect(uri);
 // initialize express
 var app = express();
 
-app.set('port', (process.env.PORT || 3000));
-
 // middleware
 app.use('/', express.static(path.join(__dirname, 'public')));
 
@@ -92,8 +90,4 @@ var INDEX_DIR = path.resolve(__dirname, './public');
 app.get('*', function(req, res) {
   console.log(INDEX_DIR);
   res.sendFile(INDEX_DIR + '/index.html');
-});
-
-app.listen(app.get('port'), function() {
-  console.log('Server started: http://localhost:' + app.get('port') + '/');
 });

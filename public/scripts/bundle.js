@@ -47119,7 +47119,8 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	/*
-
+	This page displays all of the Matched pets for a certain user. 
+	If a pet has been "swiped right",it is added to the list of matched pets.
 	*/
 	var auth = __webpack_require__(237);
 	var key = auth.PETFINDER_APP_KEY;
@@ -47136,6 +47137,7 @@
 	    };
 	  },
 	  componentDidMount: function componentDidMount(event) {
+	    //performs a get request which returns a json object of matches
 	    $.ajax({
 	      url: '/showmatches',
 	      dataType: 'json',
@@ -47155,9 +47157,11 @@
 	    });
 	  },
 	  render: function render() {
+	    //renders all pet information and images on the page
 	    var allPets = this.state.alldata.pets;
 	    console.log(allPets);
 
+	    //if statement to prevent error if no pets have been saved or when react renders after getInitialState
 	    if (!allPets[0]) {
 	      return _react2.default.createElement(
 	        'div',
@@ -47237,6 +47241,7 @@
 	  }
 	}); /* 
 	    removes a pet from Matches page
+	    not implemented in this version
 	    */
 
 /***/ },
