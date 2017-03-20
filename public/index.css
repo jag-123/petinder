@@ -2,14 +2,17 @@
 
 body {
 	background: #eee !important;
+  padding: 2em;
 }
 
+/*wrapper for login forms*/
 .wrapper {
 	margin-top: 40px;
   margin-bottom: 80px;
 	text-align: center;
 }
 
+/*styling for login forms*/
 .form-signin {
   max-width: 580px;
   padding: 15px 35px 45px;
@@ -44,8 +47,6 @@ body {
 	  border-top-right-radius: 0;
 	}
 }
-
-body { padding: 2em; }
 
 .fbLogin{
 	display: inline-block;
