@@ -18,7 +18,9 @@ var auth = require('./auth');
 var index = require('./routes/index');
 
 // connect to database
-mongoose.connect('mongodb://localhost/petinder');
+var uri = "mongodb://heroku_1t5r6jcf:8i8eejg7rul5b1l71idrqta5a4@ds137760.mlab.com:37760/heroku_1t5r6jcf"
+
+mongoose.connect(uri);
 
 // initialize express
 var app = express();
