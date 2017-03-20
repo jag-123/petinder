@@ -1,12 +1,1 @@
-To-Do List
-- Database for pets
-- ~~Databse  for users~~
-- ~~Oauth & login page~~
-- Main page - login to get started or swipe
-- Set preferences page
-- Swipe page 
-- Matches page
-- Petfinder API setup
-- css
-- Documentation
-- Heroku g
+What a Pig, formerly known as PeTinder, is an fun mashup of Tinder and Petfinder. Like Tinder, the user enters some preferences and is presented potential matches that they can then "swipe right" or "swipe left" to save a match for future viewing or discard the candidate. Unlike Tinder, What a Pig does not match you with people. Instead it matches you with adoptable pets from Petfinder, which is infinitely better! All swipe rights are displayed as matches these pets provide unconditional love regardless of your physical attributes (one of the many reasons animals > people). We highly recommend checking out the pigs! 
