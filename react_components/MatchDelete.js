@@ -1,5 +1,6 @@
 /* 
 removes a pet from Matches page
+not implemented in this version
 */
 import React from 'react';
 
@@ -7,7 +8,7 @@ export default React.createClass({
 	onError: function(err, status) {
 		console.error(status);
 	},
-  deleteMatch: function(event){
+    deleteMatch: function(event){
     console.log(this.state);
     console.log(this.props);
     // event.preventDefault();
@@ -18,7 +19,7 @@ export default React.createClass({
     // $.post('/match', matchData)
     // 	.done()
     // 	.error(this.onError);
-  },
+    },
 	render: function() {
 		return(
 			<div className="text-center">

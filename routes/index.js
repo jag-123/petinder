@@ -124,7 +124,7 @@ router.get('/showmatches', function(req, res){
 				});
 			}
 		}
-		//sets unique elements in matchedWithPfIds array
+		//creates an array of unique elements in matchedWithPfIds array
 		var pfIds = [...new Set(user.matchedWithPfIds)];
 		Pet.find({"pfId":{$in:pfIds}},function(err,pet){
 			if (err){
@@ -135,7 +135,7 @@ router.get('/showmatches', function(req, res){
 	});
 });
 
-//removes match from matchedWith field
+//removes match from matchedWith field (not implemented)
 router.get('/deletematch',function(req,res){
 	console.log(req)
 });
