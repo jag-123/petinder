@@ -55,7 +55,7 @@ export default React.createClass({
     // argObj: an object of keys and values to be passed as arguments to
     // the request keys and values must all be strings
 
-    var base = 'http://api.petfinder.com/' + func + '?format=json'
+    var base = 'https://api.petfinder.com/' + func + '?format=json'
     var argsString = this.makeArgsString(argObj);
     return base + argsString + '&callback=?';
   },
