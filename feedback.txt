@@ -17,7 +17,7 @@ Functionality:
 
 Quality:
 - Good Coding Practices: Good use of ajax requests, and well-written components. (40/40)
-- Readability: The comments on this app are extremely well-written, and functions and variables are named well. It would have been nice for the react-components folder to have been cleaned up. Also, there are some weird spacing issues that made your html for components hard to read. Lastly, remove unused commented-out code, and there is no consistency in ES6 or ES5. (35/40)
+- Readability: The comments on this app are extremely well-written, and functions and variables are named well. It would have been nice for the react-components folder to have been cleaned up. Also, there are some weird spacing issues that made your html for components hard to read. Lastly, remove unused commented-out code, and there is no consistency in ES6 or ES5. Linting will definitely help with making sure that spacing and coding practices are done correctly. (35/40)
 
 
 Awesome job!

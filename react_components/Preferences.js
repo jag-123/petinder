@@ -3,7 +3,7 @@ The page that allows the usser to set their preferences for the animal,
 size, and sex.
 */
 
-//AWESOME! Using Es6!
+//AWESOME! Using Es6! Have more components for each function of this app
 import React, { Component } from 'react';
 import { Link, browserHistory } from 'react-router';
 

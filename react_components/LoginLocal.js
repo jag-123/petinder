@@ -1,7 +1,7 @@
 /*
-Form for logging in with a username and password. 
+Form for logging in with a username and password.
 */
-
+//Good commenting on this component! Maybe look into how login is implemented in the example that I mention in the "feedback.txt" file
 import React from 'react';
 import { Link, browserHistory } from 'react-router';
 

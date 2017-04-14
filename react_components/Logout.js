@@ -1,3 +1,4 @@
+//Missing comments on this component
 import React from 'react';
 import { browserHistory } from 'react-router';
 
