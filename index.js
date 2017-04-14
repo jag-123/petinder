@@ -82,6 +82,7 @@ app.use(function(req, res, next) {
     next();
 });
 
+//Nice simple one-line for hooking up backend routes!
 //Routes for backend models
 app.use('/', index);
 

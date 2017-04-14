@@ -1,3 +1,4 @@
+//Break up this file into separate routes files, depending on different groupings. Remove any comments that you don't need
 var express = require('express');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;

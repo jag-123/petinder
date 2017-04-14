@@ -2,6 +2,8 @@
 The page that allows the usser to set their preferences for the animal,
 size, and sex.
 */
+
+//AWESOME! Using Es6!
 import React, { Component } from 'react';
 import { Link, browserHistory } from 'react-router';
 
@@ -74,6 +76,7 @@ export default class Preferences extends Component {
 			});
 	}
 	render() {
+		//definitely fix the spacing and the number of tabs in this portion
 		var pet = this.state.pet;
 		var size = this.state.size;
 		var sex = this.state.sex;

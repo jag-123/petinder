@@ -3,6 +3,7 @@ This component contains elements that should always be displayed when a user is 
 Both the title of the app and a navigation bar are rendered.
 */
 
+//It's a little confusing as to how this component ties in by the name of the component, so I would name this something more specific to what it does
 import React from 'react';
 import NavLink from './NavLink'
 import Logout from './Logout'
@@ -16,7 +17,7 @@ export default React.createClass({
             <Navbar.Header>
               <Navbar.Brand>
                 <a>What a Pig</a>
-              </Navbar.Brand> 
+              </Navbar.Brand>
             </Navbar.Header>
               <Nav>
                 <NavItem><NavLink to="/" onlyActiveOnIndex>Home</NavLink></NavItem>

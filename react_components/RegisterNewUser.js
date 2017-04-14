@@ -1,6 +1,6 @@
 /*
-The form that a new user fills out to register a new account. 
-The user provides their name, a username, a password, and confirms 
+The form that a new user fills out to register a new account.
+The user provides their name, a username, a password, and confirms
 their password.
 */
 import React from 'react';
