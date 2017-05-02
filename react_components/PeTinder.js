@@ -1,5 +1,5 @@
 /*
-The wrapper component for the app. It will either render a page with a navigation bar and a component 
+The wrapper component for the app. It will either render a page with a navigation bar and a component
 associated with the current route if the user is logged in, or a login screen if no user is logged in.
 */
 
@@ -60,7 +60,7 @@ export default React.createClass({
           { React.cloneElement(this.props.children, {
               user:this.state.userId,
               username: this.state.username,
-              prefs:this.state.userPrefs, 
+              prefs:this.state.userPrefs,
               getuser:this.getUser,
               prefhandler:this.handlePrefChange
             })

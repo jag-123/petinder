@@ -1,4 +1,4 @@
-/* 
+/*
 Link component for navigation. Keeps track of which link is active
 */
 import React from 'react';

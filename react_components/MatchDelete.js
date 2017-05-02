@@ -1,7 +1,8 @@
-/* 
+/*
 removes a pet from Matches page
 not implemented in this version
 */
+//Spacing! and remove unused comment and log statements
 import React from 'react';
 
 export default React.createClass({

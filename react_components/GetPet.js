@@ -1,7 +1,7 @@
 /*
-The page where the Tinder functionality manifests itself. A pet, chosen based on the preferences the user has set, 
+The page where the Tinder functionality manifests itself. A pet, chosen based on the preferences the user has set,
 is displayed, and the user has the choice to either "swipe right" to save the pet to their matches or "swipe left"
-to move on to the next pet without saving it. 
+to move on to the next pet without saving it.
 */
 import React from 'react';
 import MatchButton from './MatchButton'
@@ -68,7 +68,7 @@ export default React.createClass({
     for (var pref in this.getPreferences()) {
       if (this.getPreferences()[pref] !== undefined) {
         var prefsArr = this.getPreferences()[pref];
-        // the api does not seem to take multiple options for an argument, so instead 
+        // the api does not seem to take multiple options for an argument, so instead
         // we just choose a random preference for each catagory instead
         argsGetRandom[pref] = prefsArr[Math.floor(Math.random()*prefsArr.length)];
       }
