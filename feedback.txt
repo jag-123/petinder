@@ -12,7 +12,7 @@ Homework Feedback:
 
 Functionality:
 - Completion: You have OAuth (except for a complete registration capability) and all of the features that you set out to do completed. (75/80)
-- Bug Free: The app does seem bug free, except the registration part. Also, when you logout, I noticed that the route is not back at login, but instead at "/getPet?", which is not really accurate. (20/20)
+- Bug Free: The app does seem bug free, except the registration part. Also, when you logout, I noticed that the route is not back at login, but instead at "/getPet?", which is not really accurate. Lastly, what out for the console errors and warnings that pop up, because there are quite a few. (18/20)
 - Design/Usability: I really liked the styling effort. THe home page is a little sparce, and could have been removed or combined with something else. Also, the setting of preferences, tinder aspect and seeing all of the matches of the app was really nice! Nice work! Maybe renaming the navbar links would make navigation more clear, too. (18/20)
 
 Quality:
